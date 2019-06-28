@@ -3,12 +3,10 @@ const Database = use('Database');
 
 class ClubController {
   async index({ request }) {
-    return Club
-            .query()
-            .paginate(
-              request.input('page', 1),
-              request.input('perPage', 10)
-            );
+    return Club.query().paginate(
+      request.input('page', 1),
+      request.input('perPage', 10)
+    );
   }
 
   async store({ request }) {

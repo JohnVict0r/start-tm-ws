@@ -1,12 +1,12 @@
 const Antl = use('Antl');
 
 class AthleteStore {
-  get rules () {
+  get rules() {
     return {
       user_id: 'required|integer|unique:athletes',
       federation_id: 'required|integer',
-      rating: 'required|integer',
-    }
+      rating: 'required|integer'
+    };
   }
 
   get validateAll() {

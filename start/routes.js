@@ -3,9 +3,9 @@ const Route = use('Route');
 Route.get('/', () => ({ starttm: 'Bem vindo ao sistema Start TM' }));
 
 // Subscriptions
-Route
-  .post('/subscriptions', 'Auth/SubscriptionController.store')
-  .validator('Auth/Subscription/Store');
+Route.post('/subscriptions', 'Auth/SubscriptionController.store').validator(
+  'Auth/Subscription/Store'
+);
 
 /**
  * Users
@@ -75,13 +75,13 @@ Route.group(() => {
   // Confront
   Route.resource(
     'confronts',
-    'TTEvent/Championship/ConfrontController',
+    'TTEvent/Championship/ConfrontController'
   ).apiOnly();
 
   // Athlete Inscription
   Route.resource(
     'athlete-inscriptions',
-    'TTEvent/Championship/AthleteInscriptionController',
+    'TTEvent/Championship/AthleteInscriptionController'
   ).apiOnly();
 
   // Group

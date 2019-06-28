@@ -4,20 +4,18 @@ const Env = use('Env');
 const Youch = require('youch');
 
 class ExceptionHandler extends BaseExceptionHandler {
-  async handle (error, { response, request }) {
-    if ( error.name === 'ValidationException' ) {
-	   return response.status(422).json({ validation: error.messages })
-	  }
-
-    if ( error.status === 404 ) {
-     return response
-              .status(404)
-              .json({ 
-                error: error.message,
-                message: "Recurso não encontrado",
-              });
+  async handle(error, { response, request }) {
+    if (error.name === 'ValidationException') {
+      return response.status(422).json({ validation: error.messages });
     }
-	
+
+    if (error.status === 404) {
+      return response.status(404).json({
+        error: error.message,
+        message: 'Recurso não encontrado'
+      });
+    }
+
     if (Env.get('NODE_ENV') === 'development') {
       const youch = new Youch(error, request);
       const errorJSON = await youch.toJSON();
@@ -25,9 +23,9 @@ class ExceptionHandler extends BaseExceptionHandler {
       return response.status(error.status).send(errorJSON);
     }
 
-    return super.handle(...arguments)
+    return super.handle(...arguments);
   }
-  
+
   async report(error, { request }) {}
 }
 

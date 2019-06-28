@@ -25,7 +25,7 @@ class SubscriptionController {
     response.status(202).send({
       message: 'Confirmation email has been send',
       link: `${redirectUrl}/${token}`,
-      token,
+      token
     });
   }
 }

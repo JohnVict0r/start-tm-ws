@@ -1,13 +1,11 @@
-const { Federation, User } = use('App/Models');
+const { Federation } = use('App/Models');
 
 class FederationController {
   async index({ request }) {
-    return Federation
-            .query()
-            .paginate(
-              request.input('page', 1),
-              request.input('perPage', 10)
-            );
+    return Federation.query().paginate(
+      request.input('page', 1),
+      request.input('perPage', 10)
+    );
   }
 
   async store({ request }) {

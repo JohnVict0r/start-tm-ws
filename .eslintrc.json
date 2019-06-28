@@ -17,6 +17,7 @@
   "rules": {
     "class-methods-use-this": "off",
     "camelcase": "off",
-    "strict": ["off", "global"]
+    "strict": ["off", "global"],
+    "comma-dangle": "off"
   }
 }

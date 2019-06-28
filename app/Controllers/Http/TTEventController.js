@@ -3,12 +3,10 @@ const Database = use('Database');
 
 class TTEventController {
   async index({ request }) {
-    return TTEvent
-            .query()
-            .paginate(
-              request.input('page', 1),
-              request.input('perPage', 10)
-            );
+    return TTEvent.query().paginate(
+      request.input('page', 1),
+      request.input('perPage', 10)
+    );
   }
 
   async store({ request }) {
@@ -17,7 +15,7 @@ class TTEventController {
       owner_id: ownerId,
       address: addressData,
       entries: entriesData,
-      championships: championshipsData,
+      championships: championshipsData
     } = request.all();
 
     const user = await User.findOrFail(ownerId);
@@ -39,7 +37,13 @@ class TTEventController {
 
   async show({ params }) {
     const ttevent = await TTEvent.findOrFail(params.id);
-    await ttevent.loadMany(['owner', 'address', 'entries', 'championships', 'tables']);
+    await ttevent.loadMany([
+      'owner',
+      'address',
+      'entries',
+      'championships',
+      'tables'
+    ]);
     return ttevent;
   }
 

@@ -43,5 +43,5 @@ module.exports = {
   Championship,
   AthleteInscription,
   Confront,
-  Group,
+  Group
 };

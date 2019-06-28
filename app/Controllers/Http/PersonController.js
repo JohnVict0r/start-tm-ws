@@ -3,12 +3,10 @@ const Database = use('Database');
 
 class PersonController {
   async index({ request }) {
-    return Person
-            .query()
-            .paginate(
-              request.input('page', 1),
-              request.input('perPage', 10)
-            );
+    return Person.query().paginate(
+      request.input('page', 1),
+      request.input('perPage', 10)
+    );
   }
 
   async store({ request }) {

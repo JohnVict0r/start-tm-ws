@@ -1,13 +1,11 @@
-const { Athlete, User } = use('App/Models');
+const { Athlete } = use('App/Models');
 
 class AthleteController {
   async index({ request }) {
-    return Athlete
-            .query()
-            .paginate(
-              request.input('page', 1),
-              request.input('perPage', 10)
-            );
+    return Athlete.query().paginate(
+      request.input('page', 1),
+      request.input('perPage', 10)
+    );
   }
 
   async show({ params }) {
@@ -18,7 +16,7 @@ class AthleteController {
     return athlete;
   }
 
-  async store({ request, params }) {
+  async store({ request }) {
     const data = request.only(Athlete.columns());
 
     // TODO quando o atleta for criado para um usuário

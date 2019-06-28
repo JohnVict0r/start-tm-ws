@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 /*
 |--------------------------------------------------------------------------
@@ -11,48 +11,47 @@
 */
 
 /** @type {import('@adonisjs/lucid/src/Factory')} */
-const Factory = use('Factory')
-const Database = use('Database')
-const Hash = use('Hash')
+const Factory = use('Factory');
+const Database = use('Database');
+const Hash = use('Hash');
 
 class SubscriptionSeeder {
-  async run () {
-    
+  async run() {
     const encriptedPassword = await Hash.make('123123');
 
     await Database.table('users').insert([
       {
         username: 'usuario1',
         email: 'example@example.com',
-        password: encriptedPassword,
+        password: encriptedPassword
       },
       {
         username: 'usuario2',
         email: 'example@example.com',
-        password: encriptedPassword,
+        password: encriptedPassword
       },
       {
         username: 'usuario3',
         email: 'example@example.com',
-        password: encriptedPassword,
+        password: encriptedPassword
       },
       {
         username: 'usuario4',
         email: 'example@example.com',
-        password: encriptedPassword,
+        password: encriptedPassword
       },
       {
         username: 'usuario5',
         email: 'example@example.com',
-        password: encriptedPassword,
+        password: encriptedPassword
       },
       {
         username: 'usuario6',
         email: 'example@example.com',
-        password: encriptedPassword,
-      },
+        password: encriptedPassword
+      }
     ]);
   }
 }
 
-module.exports = SubscriptionSeeder
+module.exports = SubscriptionSeeder;

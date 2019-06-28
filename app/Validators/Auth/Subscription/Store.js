@@ -1,13 +1,13 @@
 const Antl = use('Antl');
 
 class AuthSubscriptionStore {
-  get rules () {
+  get rules() {
     return {
       username: 'required|unique:subscriptions',
       email: 'required|email|unique:subscriptions',
       password: 'required',
-      redirect_url: 'required',
-    }
+      redirect_url: 'required'
+    };
   }
 
   get validateAll() {

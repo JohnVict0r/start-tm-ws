@@ -20,7 +20,12 @@ class RoleController {
   }
 
   async store({ request }) {
-    const { permissions, ...data } = request.only(['name', 'slug', 'description', 'permissions']);
+    const { permissions, ...data } = request.only([
+      'name',
+      'slug',
+      'description',
+      'permissions'
+    ]);
 
     const role = await Role.create(data);
 
@@ -34,7 +39,12 @@ class RoleController {
   }
 
   async update({ request, params }) {
-    const { permissions, ...data } = request.only(['name', 'slug', 'description', 'permissions']);
+    const { permissions, ...data } = request.only([
+      'name',
+      'slug',
+      'description',
+      'permissions'
+    ]);
 
     const role = await Role.findOrFail(params.id);
 

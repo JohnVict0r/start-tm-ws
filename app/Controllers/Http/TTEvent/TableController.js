@@ -13,8 +13,8 @@ class TableController {
     const { TTEvent_id } = params;
     const data = request.only(Table.columns());
 
-    const TTEvent = await TTEvent.findOrFail(TTEvent_id);
-    const table = await TTEvent.tables().create(data);
+    const ttevent = await TTEvent.findOrFail(TTEvent_id);
+    const table = await ttevent.tables().create(data);
 
     return table;
   }

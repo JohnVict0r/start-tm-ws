@@ -1,7 +1,7 @@
 const Antl = use('Antl');
 
 class TTEventStore {
-  get rules () {
+  get rules() {
     return {
       owner_id: 'required',
       type: 'required|in:school,state,intrastate,national,club',
@@ -19,8 +19,8 @@ class TTEventStore {
       'championships.*.sex': 'required|in:M,F',
       'championships.*.type': 'required', // TODO definir types, unique
       'championships.*.upperLimit': 'required|integer',
-      'championships.*.downLimit': 'required|integer',
-    }
+      'championships.*.downLimit': 'required|integer'
+    };
   }
 
   get validateAll() {

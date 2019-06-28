@@ -1,7 +1,7 @@
 const Antl = use('Antl');
 
 class ClubStore {
-  get rules () {
+  get rules() {
     return {
       federation_id: 'required|integer',
       name: 'required',
@@ -10,8 +10,8 @@ class ClubStore {
       'address.neighborhood': 'required',
       'address.cep': 'required|integer',
       'address.city': 'required',
-      'address.state': 'required',
-    }
+      'address.state': 'required'
+    };
   }
 
   get validateAll() {
