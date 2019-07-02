@@ -1,19 +1,11 @@
 # Adonis API application
 
-This is the boilerplate for creating an API server in AdonisJs, it comes pre-configured with.
-
-1. Bodyparser
-2. Authentication
-3. CORS
-4. Lucid ORM
-5. Migrations and seeds
-
 ## Configuração
 Clone o projeto e execute os seguintes comandos:
 
 ```shell
-$ git clone git@github.com:startworks-group/starttm-api.git
-$ cd starttm-api
+$ git clone git@github.com:JohnVictor2017/start-tm-ws.git
+$ cd start-tm-ws
 $ npm install
 $ cp .env.example .env
 $ adonis key:generate
