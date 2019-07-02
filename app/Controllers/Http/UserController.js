@@ -27,14 +27,21 @@ class UserController {
 
     const {
       permissions,
-      roles,
       // token,
       password,
       username,
       email
     } = subscription;
     const hashPass = await Hash.make(password);
-    const user = await User.create({ username, email, password: hashPass });
+    const user = await User.create({
+      username,
+      email,
+      type: 'guest',
+      password: hashPass
+    });
+
+    // default role for user
+    const roles = [];
 
     if (roles) await user.roles().attach(roles);
     if (permissions) await user.permissions().attach(permissions);
