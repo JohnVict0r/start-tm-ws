@@ -33,6 +33,13 @@ class ClubController {
     return club;
   }
 
+  async getFederationClubs({ params, request }) {
+    return Club.query()
+      .where('federation_id', params.id)
+      .with('address')
+      .paginate(request.input('page', 1), request.input('perPage', 10));
+  }
+
   async update({ params, request }) {
     const data = request.only(Club.columns());
     const club = await Club.findOrFail(params.id);
