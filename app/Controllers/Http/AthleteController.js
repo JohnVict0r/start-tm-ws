@@ -11,7 +11,7 @@ class AthleteController {
   async show({ params }) {
     const athlete = await Athlete.findOrFail(params.id);
 
-    await athlete.loadMany(['federation', 'championshipInscriptions']);
+    await athlete.loadMany(['club', 'championshipInscriptions']);
 
     return athlete;
   }

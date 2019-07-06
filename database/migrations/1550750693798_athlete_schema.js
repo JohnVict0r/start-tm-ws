@@ -16,7 +16,7 @@ class AthleteSchema extends Schema {
         .unsigned()
         .notNullable();
       table
-        .integer('federation_id')
+        .integer('club_id')
         .unsigned()
         .notNullable()
         .references('federations.id');
