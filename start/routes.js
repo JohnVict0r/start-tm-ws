@@ -45,7 +45,6 @@ Route.resource('federations', 'FederationController')
 Route.resource('clubs', 'ClubController')
   .apiOnly()
   .validator(new Map([[['clubs.store'], ['Club/Store']]]));
-Route.get('federations/:id/clubs', 'ClubController.getFederationClubs');
 
 // Athletes
 Route.resource('athletes', 'AthleteController')
@@ -74,10 +73,7 @@ Route.group(() => {
  */
 Route.group(() => {
   // Confront
-  Route.resource(
-    'confronts',
-    'TTEvent/Championship/ConfrontController'
-  ).apiOnly();
+  Route.resource('confronts', 'TTEvent/Championship/ConfrontController').apiOnly();
 
   // Athlete Inscription
   Route.resource(

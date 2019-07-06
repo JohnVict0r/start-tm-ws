@@ -3,10 +3,11 @@ const Database = use('Database');
 
 class ClubController {
   async index({ request }) {
-    return Club.query().paginate(
-      request.input('page', 1),
-      request.input('perPage', 10)
-    );
+    const { page } = request.all();
+    return Club.query()
+      .with('address')
+      .filter(request.all())
+      .paginate(page || 1, 10);
   }
 
   async store({ request }) {
@@ -31,13 +32,6 @@ class ClubController {
     await club.loadMany(['address', 'federation']);
 
     return club;
-  }
-
-  async getFederationClubs({ params, request }) {
-    return Club.query()
-      .where('federation_id', params.id)
-      .with('address')
-      .paginate(request.input('page', 1), request.input('perPage', 10));
   }
 
   async update({ params, request }) {

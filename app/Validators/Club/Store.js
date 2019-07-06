@@ -5,12 +5,12 @@ class ClubStore {
     return {
       federation_id: 'required|integer',
       name: 'required',
-      'address.street': 'required',
-      'address.number': 'required|integer',
-      'address.neighborhood': 'required',
-      'address.cep': 'required|integer',
+      // 'address.street': 'required',
+      'address.number': 'integer',
+      // 'address.neighborhood': 'required',
+      'address.cep': 'integer',
       'address.city': 'required',
-      'address.state': 'required'
+      'address.uf': 'required'
     };
   }
 

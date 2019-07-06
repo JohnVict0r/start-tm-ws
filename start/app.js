@@ -21,6 +21,7 @@ const providers = [
   'adonis-acl/providers/AclProvider',
   '@adonisjs/validator/providers/ValidatorProvider',
   '@adonisjs/antl/providers/AntlProvider',
+  'adonis-lucid-filter/providers/LucidFilterProvider'
 ];
 /*
 |--------------------------------------------------------------------------
@@ -33,7 +34,7 @@ const providers = [
 */
 const aceProviders = [
   '@adonisjs/lucid/providers/MigrationsProvider',
-  'adonis-acl/providers/CommandsProvider',
+  'adonis-acl/providers/CommandsProvider'
 ];
 
 /*
@@ -50,7 +51,7 @@ const aceProviders = [
 */
 const aliases = {
   Role: 'Adonis/Acl/Role',
-  Permission: 'Adonis/Acl/Permission',
+  Permission: 'Adonis/Acl/Permission'
 };
 
 /*
@@ -67,5 +68,5 @@ module.exports = {
   providers,
   aceProviders,
   aliases,
-  commands,
+  commands
 };

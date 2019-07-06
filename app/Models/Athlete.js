@@ -9,7 +9,7 @@ class Athlete extends Model {
   }
 
   static columns() {
-    return ['rating', 'federation_id', 'user_id'];
+    return ['rating', 'club_id', 'user_id'];
   }
 
   championshipInscriptions() {
@@ -20,8 +20,8 @@ class Athlete extends Model {
     return this.belongsTo(`${base}/User`);
   }
 
-  federation() {
-    return this.belongsTo(`${base}/Federation`);
+  club() {
+    return this.belongsTo(`${base}/Club`);
   }
 }
 
