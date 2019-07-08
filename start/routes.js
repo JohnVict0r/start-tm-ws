@@ -2,9 +2,11 @@
 const Route = use('Route');
 Route.get('/', () => ({ starttm: 'Bem vindo ao sistema Start TM' }));
 
+const { auth, ttevent, championship } = use('App/Utils/ControllersPath');
+
 // Subscriptions
-Route.post('/subscriptions', 'Auth/SubscriptionController.store').validator(
-  'Auth/Subscription/Store'
+Route.post('/subscriptions', `${auth}/SubscriptionController.store`).validator(
+  `${auth}/Subscription/Store`
 );
 
 /**
@@ -20,19 +22,19 @@ Route.resource('people', 'PersonController')
 /**
  * Auth Sessions
  */
-Route.resource('sessions', 'Auth/SessionController');
+Route.resource('sessions', `${auth}/SessionController`);
 
 /**
  * Auth Permissions
  */
-Route.resource('permissions', 'Auth/Roles/PermissionController')
+Route.resource('permissions', `${auth}/PermissionController`)
   .apiOnly()
   .middleware('auth');
 
 /**
  * Auth Roles
  */
-Route.resource('roles', 'Auth/RoleController')
+Route.resource('roles', `${auth}/RoleController`)
   .apiOnly()
   .middleware('auth');
 
@@ -60,10 +62,7 @@ Route.resource('ttevents', 'TTEventController')
 
 Route.group(() => {
   // Table
-  Route.resource('tables', 'TTEvent/TableController').apiOnly();
-
-  // Championship
-  Route.resource('championships', 'TTEvent/ChampionshipController').apiOnly();
+  Route.resource('tables', `${ttevent}/TableController`).apiOnly();
 })
   .prefix('ttevents/:ttevent_id/')
   .middleware(['auth', 'is:(federation)']);
@@ -71,16 +70,15 @@ Route.group(() => {
 /**
  * Championship
  */
+Route.resource('championships', `${ttevent}/ChampionshipController`).apiOnly();
+
 Route.group(() => {
   // Confront
-  Route.resource('confronts', 'TTEvent/Championship/ConfrontController').apiOnly();
+  Route.resource('confronts', `${ttevent}/ConfrontController`).apiOnly();
 
   // Athlete Inscription
-  Route.resource(
-    'athlete-inscriptions',
-    'TTEvent/Championship/AthleteInscriptionController'
-  ).apiOnly();
+  Route.resource('athlete-inscriptions', `${championship}/AthleteInscriptionController`).apiOnly();
 
   // Group
-  Route.resource('groups', 'TTEvent/Championship/GroupController').apiOnly();
+  Route.resource('groups', `${championship}/GroupController`).apiOnly();
 }).prefix('championships/:championship_id/');

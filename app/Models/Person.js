@@ -9,7 +9,7 @@ class Person extends Model {
   }
 
   static columns() {
-    return ['name', 'sex', 'birth', 'cpf', 'rg', 'user_id'];
+    return ['name', 'sex', 'birth', 'cpf', 'rg', 'address', 'user_id'];
   }
 
   static columnsUpdate() {

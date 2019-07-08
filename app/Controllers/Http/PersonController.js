@@ -3,24 +3,22 @@ const Database = use('Database');
 
 class PersonController {
   async index({ request }) {
-    return Person.query().paginate(
-      request.input('page', 1),
-      request.input('perPage', 10)
-    );
+    return Person.query().paginate(request.input('page', 1), request.input('perPage', 10));
   }
 
   async store({ request }) {
     const data = request.only(Person.columns());
+    const { user_id } = data;
     const addressData = request.input('address');
 
-    const user = await User.findOrFail(request.input('user_id'));
+    const user = await User.findOrFail(user_id);
 
     const trx = await Database.beginTransaction();
 
     const address = await Address.create(addressData, trx);
-
     data.address_id = address.id;
-    const person = await Person.create(data, trx);
+
+    const person = await user.person().create(data, trx);
 
     await trx.commit();
 
