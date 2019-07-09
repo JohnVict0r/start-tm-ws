@@ -1,4 +1,5 @@
 /* eslint-disable linebreak-style */
+
 'use strict';
 
 /*
@@ -15,10 +16,8 @@
 /** @type {import('@adonisjs/lucid/src/Factory')} */
 const Factory = use('Factory');
 
-Factory.blueprint('App/Models/User', (faker) => {
-  return {
-    username: faker.username(),
-    email: faker.email({ domain: 'example.com' }),
-    password: faker.password()
-  };
-});
+Factory.blueprint('App/Models/User', faker => ({
+  username: faker.username(),
+  email: faker.email({ domain: 'example.com' }),
+  password: faker.password()
+}));

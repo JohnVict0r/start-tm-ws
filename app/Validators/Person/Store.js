@@ -14,7 +14,7 @@ class PersonStore {
       'address.neighborhood': 'required',
       'address.cep': 'required|integer',
       'address.city': 'required',
-      'address.state': 'required'
+      'address.uf': 'required'
     };
   }
 

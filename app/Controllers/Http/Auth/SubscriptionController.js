@@ -3,13 +3,11 @@ const Hash = use('Hash');
 const { Subscription } = use('App/Models');
 
 class SubscriptionController {
-  async store({ request, response }) {
+  async store({ request }) {
     const redirectUrl = request.input('redirect_url');
     const data = request.only(['username', 'email', 'password']);
 
-    const hash = await Hash.make(data.username + data.email + data.password);
-
-    const token = hash.replace('/', '');
+    const token = await Hash.make(data.username + data.email + data.password);
 
     await Subscription.create({ ...data, token });
 
@@ -22,11 +20,11 @@ class SubscriptionController {
     //     .subject('Confirm Email Address');
     // });
 
-    response.status(202).send({
+    return {
       message: 'Confirmation email has been send',
-      link: `${redirectUrl}/${token}`,
+      link: `${redirectUrl}${token}`,
       token
-    });
+    };
   }
 }
 

@@ -6,14 +6,7 @@ const Youch = require('youch');
 class ExceptionHandler extends BaseExceptionHandler {
   async handle(error, { response, request }) {
     if (error.name === 'ValidationException') {
-      return response.status(422).json({ validation: error.messages });
-    }
-
-    if (error.status === 404) {
-      return response.status(404).json({
-        error: error.message,
-        message: 'Recurso não encontrado'
-      });
+      return response.status(422).json(error.messages);
     }
 
     if (Env.get('NODE_ENV') === 'development') {
