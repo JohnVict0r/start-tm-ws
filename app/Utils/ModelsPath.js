@@ -2,6 +2,6 @@
 
 const base = 'App/Models';
 const ttevent = `${base}/TTEvent`;
-const championship = `${ttevent}/Championship`;
+const championship = `${base}/Championship`;
 
 module.exports = { base, ttevent, championship };

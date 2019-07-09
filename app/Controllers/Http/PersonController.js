@@ -7,18 +7,14 @@ class PersonController {
   }
 
   async store({ request }) {
-    const data = request.only(Person.columns());
-    const { user_id } = data;
-    const addressData = request.input('address');
-
-    const user = await User.findOrFail(user_id);
+    const { address, ...data } = request.only(Person.columns());
 
     const trx = await Database.beginTransaction();
 
-    const address = await Address.create(addressData, trx);
-    data.address_id = address.id;
+    const { id: address_id } = await Address.create(address, trx);
+    data.address_id = address_id;
 
-    const person = await user.person().create(data, trx);
+    const person = await Person.create(data, trx);
 
     await trx.commit();
 
@@ -34,7 +30,8 @@ class PersonController {
   }
 
   async update({ params, request }) {
-    const data = request.only(Person.columnsUpdate());
+    const { address, user_id, ...data } = request.only(Person.columns());
+
     const person = await Person.findOrFail(params.id);
 
     person.merge(data);

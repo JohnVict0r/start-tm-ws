@@ -12,7 +12,7 @@ class Club extends Model {
   }
 
   static columns() {
-    return ['name', 'federation_id'];
+    return ['name', 'address', 'federation_id'];
   }
 
   federation() {

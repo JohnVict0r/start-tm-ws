@@ -1,21 +1,21 @@
 'use strict';
 
-const { Confront, Championship } = use('App/Models');
+const { Confront } = use('App/Models');
 
 class ConfrontController {
   async index() {
-    // TODO retornar confronts apenas de um championship or ttevent
     const confronts = await Confront.all();
 
     return confronts;
   }
 
   async store({ request, params }) {
-    const { championship_id } = params;
-    const data = request.only(Confront.columns());
+    const { championships_id } = params;
 
-    const championship = await Championship.findOrFail(championship_id);
-    const confront = await championship.confronts().create(data);
+    const data = request.only(Confront.columns());
+    data.championship_id = championships_id;
+
+    const confront = await Confront.create(data);
 
     return confront;
   }
@@ -32,7 +32,7 @@ class ConfrontController {
 
   async update({ params, request }) {
     const { id } = params;
-    const data = request.only(Confront.columns());
+    const { championship_id, ...data } = request.only(Confront.columns());
 
     const confront = await Confront.findOrFail(id);
 

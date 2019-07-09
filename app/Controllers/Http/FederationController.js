@@ -2,10 +2,7 @@ const { Federation } = use('App/Models');
 
 class FederationController {
   async index({ request }) {
-    return Federation.query().paginate(
-      request.input('page', 1),
-      request.input('perPage', 10)
-    );
+    return Federation.query().paginate(request.input('page', 1), request.input('perPage', 10));
   }
 
   async store({ request }) {
@@ -31,9 +28,7 @@ class FederationController {
 
   async destroy({ params }) {
     const federation = await Federation.findOrFail(params.id);
-    const resp = await federation.delete();
-
-    return resp;
+    return federation.delete();
   }
 }
 

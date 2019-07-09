@@ -8,7 +8,7 @@ class Championship extends Model {
   }
 
   static columns() {
-    return ['sex', 'type', 'upperLimit', 'downLimit'];
+    return ['sex', 'type', 'upperLimit', 'downLimit', 'tt_event_id'];
   }
 
   athleteInscriptions() {

@@ -9,7 +9,15 @@ class Confront extends Model {
   }
 
   static columns() {
-    return ['number', 'player_one', 'player_two', 'arbiter', 'phase', 'table_id'];
+    return [
+      'number',
+      'player_one',
+      'player_two',
+      'arbiter',
+      'phase',
+      'table_id',
+      'championship_id'
+    ];
   }
 
   playerOne() {

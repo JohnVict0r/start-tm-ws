@@ -11,7 +11,7 @@ class AthleteInscription extends Model {
   }
 
   static columns() {
-    return ['athlete_id'];
+    return ['athlete_id', 'group_id', 'championship_id', 'approved'];
   }
 
   athlete() {

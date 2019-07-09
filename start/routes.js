@@ -63,14 +63,12 @@ Route.resource('ttevents', 'TTEventController')
 Route.group(() => {
   // Table
   Route.resource('tables', `${ttevent}/TableController`).apiOnly();
-})
-  .prefix('ttevents/:ttevent_id/')
-  .middleware(['auth', 'is:(federation)']);
+}).prefix('ttevents/:tt_events_id/');
 
 /**
  * Championship
  */
-Route.resource('championships', `${ttevent}/ChampionshipController`).apiOnly();
+Route.resource('championships', 'ChampionshipController').apiOnly();
 
 Route.group(() => {
   // Confront
@@ -81,4 +79,4 @@ Route.group(() => {
 
   // Group
   Route.resource('groups', `${championship}/GroupController`).apiOnly();
-}).prefix('championships/:championship_id/');
+}).prefix('championships/:championships_id/');

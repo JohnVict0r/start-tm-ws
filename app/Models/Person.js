@@ -12,10 +12,6 @@ class Person extends Model {
     return ['name', 'sex', 'birth', 'cpf', 'rg', 'address', 'user_id'];
   }
 
-  static columnsUpdate() {
-    return ['name', 'sex', 'birth'];
-  }
-
   user() {
     return this.belongsTo(`${base}/User`);
   }
