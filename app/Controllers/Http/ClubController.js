@@ -11,14 +11,13 @@ class ClubController {
   }
 
   async store({ request }) {
-    const data = request.only(Club.columns());
-    const addressData = request.input('address');
+    const { address, ...data } = request.only(Club.columns());
 
     const trx = await Database.beginTransaction();
 
-    const address = await Address.create(addressData, trx);
+    const { id: address_id } = await Address.create(address, trx);
+    data.address_id = address_id;
 
-    data.address_id = address.id;
     const club = await Club.create(data, trx);
 
     await trx.commit();
@@ -35,7 +34,7 @@ class ClubController {
   }
 
   async update({ params, request }) {
-    const data = request.only(Club.columns());
+    const { address, ...data } = request.only(Club.columns());
     const club = await Club.findOrFail(params.id);
 
     club.merge(data);

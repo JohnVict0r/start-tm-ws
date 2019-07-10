@@ -6,17 +6,25 @@ class TTEventSchema extends Schema {
   up() {
     this.create('ttevents', (table) => {
       table.increments();
-      table.integer('owner_id').notNullable();
       table.enu('type', eventTypes).notNullable();
       table.string('name').notNullable();
       table.datetime('start').notNullable();
       table.datetime('end').notNullable();
       table
+        .integer('owner_id')
+        .unsigned()
+        .notNullable()
+        .references('users.id')
+        .onUpdate('CASCADE')
+        .onDelete('CASCADE');
+      table
         .integer('address_id')
         .notNullable()
         .unique()
         .unsigned()
-        .references('addresses.id');
+        .references('addresses.id')
+        .onUpdate('CASCADE')
+        .onDelete('CASCADE');
       table.timestamps();
     });
   }

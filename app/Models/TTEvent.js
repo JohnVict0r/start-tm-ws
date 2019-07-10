@@ -13,7 +13,17 @@ class TTEvent extends Model {
   }
 
   static columns() {
-    return ['name', 'type', 'start', 'end'];
+    return [
+      'name',
+      'type',
+      'start',
+      'end',
+      'owner_id',
+      'address',
+      'entries',
+      'championships',
+      'tables'
+    ];
   }
 
   owner() {

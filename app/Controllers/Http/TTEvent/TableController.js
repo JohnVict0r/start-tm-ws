@@ -1,6 +1,6 @@
 'use strict';
 
-const { Table, TTEvent } = use('App/Models');
+const { Table } = use('App/Models');
 
 class TableController {
   async index() {
@@ -10,11 +10,12 @@ class TableController {
   }
 
   async store({ request, params }) {
-    const { TTEvent_id } = params;
-    const data = request.only(Table.columns());
+    const { tt_events_id } = params;
 
-    const ttevent = await TTEvent.findOrFail(TTEvent_id);
-    const table = await ttevent.tables().create(data);
+    const data = request.only(Table.columns());
+    data.tt_event_id = tt_events_id;
+
+    const table = await Table.create(data);
 
     return table;
   }

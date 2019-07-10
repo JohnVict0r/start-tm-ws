@@ -4,7 +4,7 @@ class AthleteStore {
   get rules() {
     return {
       user_id: 'required|integer|unique:athletes',
-      federation_id: 'required|integer',
+      club_id: 'required|integer',
       rating: 'required|integer'
     };
   }

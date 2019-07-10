@@ -1,7 +1,7 @@
 'use strict';
 
 const ttevent = 'TTEvent';
-const championship = `${ttevent}/Championship`;
+const championship = 'Championship';
 const auth = 'Auth';
 
 module.exports = { ttevent, championship, auth };

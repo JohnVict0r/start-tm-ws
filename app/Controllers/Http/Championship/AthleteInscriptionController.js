@@ -1,6 +1,6 @@
 'use strict';
 
-const { AthleteInscription, Championship } = use('App/Models');
+const { AthleteInscription } = use('App/Models');
 
 class AthleteInscriptionController {
   async index() {
@@ -9,11 +9,12 @@ class AthleteInscriptionController {
   }
 
   async store({ request, params }) {
-    const data = await request.only(AthleteInscription.columns());
+    const { championships_id } = params;
 
-    const championship = await Championship.findOrFail(params.championship_id);
+    const { approved, ...data } = request.only(AthleteInscription.columns());
+    data.championship_id = championships_id;
 
-    const inscription = await championship.athleteInscriptions().create(data);
+    const inscription = await AthleteInscription.create(data);
 
     return inscription;
   }
@@ -27,7 +28,11 @@ class AthleteInscriptionController {
   }
 
   async update({ params, request }) {
-    const data = request.only(['approved']);
+    const {
+      championship_id, approved, athlete_id, ...data
+    } = request.only(
+      AthleteInscription.columns()
+    );
 
     const athleteInscription = await AthleteInscription.findOrFail(params.id);
 

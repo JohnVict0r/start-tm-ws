@@ -13,7 +13,7 @@ class TTEventStore {
       'address.neighborhood': 'required',
       'address.cep': 'required|integer',
       'address.city': 'required',
-      'address.state': 'required',
+      'address.uf': 'required',
       'entries.*.type': 'required', // TODO definir types
       'entries.*.price': 'required', // TODO pegar valor double ou float
       'championships.*.sex': 'required|in:M,F',

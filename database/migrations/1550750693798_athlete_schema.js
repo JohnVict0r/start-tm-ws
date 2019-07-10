@@ -19,7 +19,7 @@ class AthleteSchema extends Schema {
         .integer('club_id')
         .unsigned()
         .notNullable()
-        .references('federations.id');
+        .references('clubs.id');
       table.timestamps();
     });
   }
