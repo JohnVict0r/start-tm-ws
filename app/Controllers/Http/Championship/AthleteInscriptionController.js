@@ -14,7 +14,7 @@ class AthleteInscriptionController {
     const { approved, ...data } = request.only(AthleteInscription.columns());
     data.championship_id = championships_id;
 
-    const inscription = await AthleteInscription().create(data);
+    const inscription = await AthleteInscription.create(data);
 
     return inscription;
   }

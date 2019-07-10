@@ -1,6 +1,6 @@
 'use strict';
 
-const { Table, TTEvent } = use('App/Models');
+const { Table } = use('App/Models');
 
 class TableController {
   async index() {

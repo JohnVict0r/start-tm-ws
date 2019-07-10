@@ -63,7 +63,9 @@ Route.resource('ttevents', 'TTEventController')
 Route.group(() => {
   // Table
   Route.resource('tables', `${ttevent}/TableController`).apiOnly();
-}).prefix('ttevents/:tt_events_id/');
+})
+  .prefix('ttevents/:tt_events_id/')
+  .middleware(['auth', 'is:(federation)']);
 
 /**
  * Championship

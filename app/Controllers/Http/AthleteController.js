@@ -8,7 +8,7 @@ class AthleteController {
   async show({ params }) {
     const athlete = await Athlete.findOrFail(params.id);
 
-    await athlete.loadMany(['club', 'championshipInscriptions']);
+    await athlete.loadMany(['user', 'club', 'championshipInscriptions']);
 
     return athlete;
   }
