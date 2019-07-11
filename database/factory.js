@@ -1,23 +1,24 @@
-/* eslint-disable linebreak-style */
-
 'use strict';
-
-/*
-|--------------------------------------------------------------------------
-| Factory
-|--------------------------------------------------------------------------
-|
-| Factories are used to define blueprints for database tables or Lucid
-| models. Later you can use these blueprints to seed your database
-| with dummy data.
-|
-*/
 
 /** @type {import('@adonisjs/lucid/src/Factory')} */
 const Factory = use('Factory');
+const Hash = use('Hash');
+const { base } = use('App/Utils/ModelsPath');
 
-Factory.blueprint('App/Models/User', faker => ({
+Factory.blueprint(`${base}/User`, async faker => ({
   username: faker.username(),
   email: faker.email({ domain: 'example.com' }),
-  password: faker.password()
+  password: await Hash.make(faker.password())
+}));
+
+Factory.blueprint('Role', async (faker, i, data) => ({
+  name: data.name,
+  slug: data.slug,
+  description: 'Auto Generated Role'
+}));
+
+Factory.blueprint('Permission', async (faker, i, data) => ({
+  name: data.name,
+  slug: data.slug,
+  description: 'Auto Generated Permission'
 }));

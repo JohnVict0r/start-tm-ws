@@ -9,18 +9,18 @@ class UserController {
   async show({ params }) {
     const user = await User.findOrFail(params.id);
 
-    await user.loadMany(['person', 'athlete', 'roles', 'permissions']);
+    await user.loadMany(['person', 'athlete', 'roles']);
 
     return user;
   }
 
   async store({ request }) {
-    const subscriptionToken = request.input('subscriptionToken');
+    const subscriptionToken = request.input('subscription_token');
 
     const subscription = await Subscription.findByOrFail('token', subscriptionToken);
 
     const {
-      permissions, password, username, email
+      roles, password, username, email
     } = subscription;
 
     const hashPass = await Hash.make(password);
@@ -31,11 +31,7 @@ class UserController {
       password: hashPass
     });
 
-    // default role for user
-    const roles = [];
-
-    if (roles) await user.roles().attach(roles);
-    if (permissions) await user.permissions().attach(permissions);
+    await user.roles().attach(roles);
 
     await subscription.delete();
 

@@ -1,37 +1,17 @@
-const User = use('App/Models/User');
-const Role = use('Role');
+'use strict';
+
+const Factory = use('Factory');
+const Database = use('Database');
+
+const { base } = use('App/Utils/ModelsPath');
 
 class UserSeeder {
   async run() {
-    // =============================================================================
-    // Create roles
-    // =============================================================================
-    const roleAdmin = await Role.findOrCreate(
-      {
-        name: 'Administrator'
-      },
-      {
-        name: 'Administrator',
-        slug: 'administrator',
-        description: 'manage administration privileges'
-      }
-    );
+    // Visitor
+    const user = await Factory.model(`${base}/User`).create();
+    const roles = awa;
 
-    // ==============================================================================
-    // Create users
-    // ==============================================================================
-
-    let user = await User.findOrCreate(
-      {
-        username: 'admin'
-      },
-      {
-        username: 'admin',
-        email: 'admin@test.com',
-        password: 'secret'
-      }
-    );
-    await user.roles().attach([roleAdmin.id]);
+    user.roles().attach([]);
   }
 }
 

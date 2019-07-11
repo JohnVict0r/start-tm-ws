@@ -1,11 +1,12 @@
+'use strict';
+
 const Hash = use('Hash');
 // const Mail = use('Mail');
 const { Subscription } = use('App/Models');
 
 class SubscriptionController {
   async store({ request }) {
-    const redirectUrl = request.input('redirect_url');
-    const data = request.only(['username', 'email', 'password']);
+    const { redirect_url, ...data } = request.only(Subscription.columns());
 
     const token = await Hash.make(data.username + data.email + data.password);
 
@@ -22,7 +23,7 @@ class SubscriptionController {
 
     return {
       message: 'Confirmation email has been send',
-      link: `${redirectUrl}${token}`,
+      link: `${redirect_url}${token}`,
       token
     };
   }
