@@ -10,7 +10,11 @@ class UserSeeder {
   async run() {
     let result = null;
     // Users
-    const admUser = await Factory.model(`${base}/User`).create({ username: 'adminUser' });
+    const admUser = await Factory.model(`${base}/User`).create({
+      username: 'adminUser',
+      email: 'admin@admin.com'
+    });
+
     const guestUser = await Factory.model(`${base}/User`).create({ username: 'guestUser' });
     const clubUser = await Factory.model(`${base}/User`).create({ username: 'clubUser' });
     const fedUser = await Factory.model(`${base}/User`).create({ username: 'fedUser' });

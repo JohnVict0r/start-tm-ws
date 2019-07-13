@@ -7,7 +7,7 @@ const { base } = use('App/Utils/ModelsPath');
 
 Factory.blueprint(`${base}/User`, async (faker, i, data) => ({
   username: data.username,
-  email: faker.email({ domain: 'example.com' }),
+  email: data.email ? data.email : faker.email({ domain: 'example.com' }),
   password: await Hash.make('psw12345')
 }));
 

@@ -5,7 +5,22 @@ const Route = use('Route');
 Route.get('/', async () => {});
 
 const { auth, ttevent, championship } = use('App/Utils/ControllersPath');
-const roles = require('../database/data/role');
+const roles = require('../database/data/role').slugs;
+
+// Permissions
+Route.resource('permissions', `${auth}/PermissionController`)
+  .apiOnly()
+  .middleware(new Map([[['store', 'update', 'destroy'], ['auth', `is:${roles.adm}`]]]));
+
+// Roles
+Route.resource('roles', `${auth}/RoleController`)
+  .apiOnly()
+  .middleware(new Map([[['store', 'update', 'destroy'], ['auth', `is:${roles.adm}`]]]));
+
+// Sessions
+Route.resource('sessions', `${auth}/SessionController`)
+  .apiOnly()
+  .middleware(new Map([[['index', 'update', 'destroy'], ['auth', `is:${roles.adm}`]]]));
 
 // Subscriptions
 Route.post('/subscriptions', `${auth}/SubscriptionController.store`).validator(
@@ -15,26 +30,17 @@ Route.post('/subscriptions', `${auth}/SubscriptionController.store`).validator(
 // Users
 Route.resource('users', 'UserController')
   .apiOnly()
-  .middleware(new Map([[['update', 'destroy'], ['auth', `is:${roles.adm}`]]]));
+  .middleware(
+    new Map([
+      [['index', 'show', 'update', 'destroy'], ['auth', `is:${roles.adm}`]],
+      [['show'], ['auth', `is:(${roles.adm} || ${roles.gst})`]]
+    ])
+  );
 
 // People
 Route.resource('people', 'PersonController')
   .apiOnly()
   .validator(new Map([[['people.store'], ['Person/Store']]]))
-  .middleware(new Map([[['store', 'update', 'destroy'], ['auth', `is:${roles.adm}`]]]));
-
-// Sessions
-Route.resource('sessions', `${auth}/SessionController`).middleware(
-  new Map([[['store', 'update', 'destroy'], ['auth', `is:${roles.adm}`]]])
-);
-// Permissions
-Route.resource('permissions', `${auth}/PermissionController`)
-  .apiOnly()
-  .middleware(new Map([[['store', 'update', 'destroy'], ['auth', `is:${roles.adm}`]]]));
-
-// Roles
-Route.resource('roles', `${auth}/RoleController`)
-  .apiOnly()
   .middleware(new Map([[['store', 'update', 'destroy'], ['auth', `is:${roles.adm}`]]]));
 
 // Federations
