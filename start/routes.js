@@ -13,7 +13,9 @@ Route.post('/subscriptions', `${auth}/SubscriptionController.store`).validator(
 );
 
 // Users
-Route.resource('users', 'UserController').apiOnly();
+Route.resource('users', 'UserController')
+  .apiOnly()
+  .middleware(new Map([[['update', 'destroy'], ['auth', `is:${roles.adm}`]]]));
 
 // People
 Route.resource('people', 'PersonController')
