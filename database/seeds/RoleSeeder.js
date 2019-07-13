@@ -4,28 +4,35 @@
 const Factory = use('Factory');
 const Database = use('Database');
 
+const roles = require('../data/role');
+
 class RoleSeeder {
   async run() {
+    let result = null;
     // Roles
-    const admRole = await Factory.model('Role').create({ name: 'Administrator', slug: 'adm' });
-    const guestRole = await Factory.model('Role').create({ name: 'Guest', slug: 'gst' });
-    const clubRole = await Factory.model('Role').create({ name: 'Club President', slug: 'clu' });
-    const fedRole = await Factory.model('Role').create({
-      name: 'Federation President',
-      slug: 'fed'
-    });
+    const admRole = await Factory.model('Adonis/Acl/Role').create(roles.adm);
+    const guestRole = await Factory.model('Adonis/Acl/Role').create(roles.gst);
+    const clubRole = await Factory.model('Adonis/Acl/Role').create(roles.club);
+    const fedRole = await Factory.model('Adonis/Acl/Role').create(roles.fed);
 
     // With Permissions
-    const allPerm = await Database.select('id').from('permissions');
-    const readPerm = await Database.select('id')
+    result = await Database.select('id').from('permissions');
+    const allPerm = result.map(row => row.id);
+
+    result = await Database.select('id')
       .from('permissions')
       .where('slug', 'like', 'view_%');
-    const athletePerm = await Database.select('id')
+    const readPerm = result.map(row => row.id);
+
+    result = await Database.select('id')
       .from('permissions')
       .where('slug', 'like', '%_athletes');
-    const clubPerm = await Database.select('id')
+    const athletePerm = result.map(row => row.id);
+
+    result = await Database.select('id')
       .from('permissions')
       .where('slug', 'like', '%_clubs');
+    const clubPerm = result.map(row => row.id);
 
     await admRole.permissions().attach(allPerm);
     await guestRole.permissions().attach(readPerm);
