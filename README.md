@@ -1,6 +1,7 @@
 # Adonis API application
 
 ## Configuração
+
 Clone o projeto e execute os seguintes comandos:
 
 ```shell
@@ -11,16 +12,30 @@ $ cp .env.example .env
 $ adonis key:generate
 $ adonis migration:run
 ```
+
 Altere o arquivo .env com suas configurações locais, como por exemplo, as informações do banco de dados (DB_HOST, DB_DATABASE, DB_USERNAME, DB_PASSWORD, etc)
 Lembre-se se alterar o DB_HOST para 127.0.0.1
 
 Inicie o servidor e acesse via http://127.0.0.1:3333 🤞🙏⏱👍
+
 ```
-$ adonis serve   
+$ adonis serve
 ```
 
+### Seed
+
+```
+$ yarn seed
+```
+
+OU
+
+```
+$ npm run seed
+```
 
 ### Colaboradores
+
 <hr>
 <table>
   <tr>
