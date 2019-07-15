@@ -19,9 +19,7 @@ class UserController {
 
     const subscription = await Subscription.findByOrFail('token', subscriptionToken);
 
-    const {
-      roles, password, username, email
-    } = subscription;
+    const { password, username, email } = subscription;
 
     const hashPass = await Hash.make(password);
 
@@ -30,8 +28,6 @@ class UserController {
       email,
       password: hashPass
     });
-
-    await user.roles().attach(roles);
 
     await subscription.delete();
 

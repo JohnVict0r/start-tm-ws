@@ -9,7 +9,7 @@ class Subscription extends Model {
   }
 
   static columns() {
-    return ['username', 'email', 'password', 'roles', 'redirect_url'];
+    return ['username', 'email', 'password', 'redirect_url'];
   }
 }
 
