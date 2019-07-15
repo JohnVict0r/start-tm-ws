@@ -2,12 +2,14 @@
 
 const Schema = use('Schema');
 
+const permission = require('../data/permission');
+
 class PermissionsTableSchema extends Schema {
   up() {
     this.create('permissions', (table) => {
       table.increments();
       table
-        .string('slug')
+        .enu('slug', permission.slugs)
         .notNullable()
         .unique();
       table
