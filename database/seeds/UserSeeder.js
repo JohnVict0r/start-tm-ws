@@ -1,37 +1,49 @@
-const User = use('App/Models/User');
-const Role = use('Role');
+'use strict';
+
+const Factory = use('Factory');
+const Database = use('Database');
+
+const { base } = use('App/Utils/ModelsPath');
+const role = require('../data/role');
 
 class UserSeeder {
   async run() {
-    // =============================================================================
-    // Create roles
-    // =============================================================================
-    const roleAdmin = await Role.findOrCreate(
-      {
-        name: 'Administrator'
-      },
-      {
-        name: 'Administrator',
-        slug: 'administrator',
-        description: 'manage administration privileges'
-      }
-    );
+    let result = null;
+    // Users
+    const admUser = await Factory.model(`${base}/User`).create({
+      username: 'adminUser',
+      email: 'admin@admin.com'
+    });
 
-    // ==============================================================================
-    // Create users
-    // ==============================================================================
+    const guestUser = await Factory.model(`${base}/User`).create({ username: 'guestUser' });
+    const clubUser = await Factory.model(`${base}/User`).create({ username: 'clubUser' });
+    const fedUser = await Factory.model(`${base}/User`).create({ username: 'fedUser' });
 
-    let user = await User.findOrCreate(
-      {
-        username: 'admin'
-      },
-      {
-        username: 'admin',
-        email: 'admin@test.com',
-        password: 'secret'
-      }
-    );
-    await user.roles().attach([roleAdmin.id]);
+    // With Roles
+    result = await Database.select('id')
+      .from('roles')
+      .where({ slug: role.adm.slug });
+    const admRole = result.map(row => row.id);
+
+    result = await Database.select('id')
+      .from('roles')
+      .where({ slug: role.gst.slug });
+    const guestRole = result.map(row => row.id);
+
+    result = await Database.select('id')
+      .from('roles')
+      .where({ slug: role.club.slug });
+    const clubRole = result.map(row => row.id);
+
+    result = await Database.select('id')
+      .from('roles')
+      .where({ slug: role.fed.slug });
+    const fedRole = result.map(row => row.id);
+
+    await admUser.roles().attach(admRole);
+    await guestUser.roles().attach(guestRole);
+    await clubUser.roles().attach(clubRole);
+    await fedUser.roles().attach(fedRole);
   }
 }
 

@@ -1,6 +1,6 @@
 'use strict';
 
-const Permission = use('Persmission');
+const Permission = use('Permission');
 
 class PermissionController {
   async index() {
