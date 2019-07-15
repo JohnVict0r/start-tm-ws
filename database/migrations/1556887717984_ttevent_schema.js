@@ -1,12 +1,12 @@
 /** @type {import('@adonisjs/lucid/src/Schema')} */
 const Schema = use('Schema');
-const eventTypes = require('../data/ttevent/types');
+const event = require('../data/ttevent');
 
 class TTEventSchema extends Schema {
   up() {
     this.create('ttevents', (table) => {
       table.increments();
-      table.enu('type', eventTypes).notNullable();
+      table.enu('type', event.types).notNullable();
       table.string('name').notNullable();
       table.datetime('start').notNullable();
       table.datetime('end').notNullable();

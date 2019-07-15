@@ -3,7 +3,7 @@
 /** @type {import('@adonisjs/lucid/src/Schema')} */
 const Schema = use('Schema');
 
-const phaseTypes = require('../data/confront/phase');
+const confront = require('../data/confront');
 
 class ConfrontSchema extends Schema {
   up() {
@@ -26,7 +26,7 @@ class ConfrontSchema extends Schema {
         .references('athletes.id')
         .onUpdate('cascade');
       table.string('arbiter').notNullable();
-      table.enu('phase', phaseTypes).defaultTo(phaseTypes[0]);
+      table.enu('phase', confront.phases).defaultTo(confront.phases[0]);
       table
         .integer('table_id')
         .notNullable()
