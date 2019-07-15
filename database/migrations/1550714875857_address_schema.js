@@ -1,6 +1,6 @@
 /** @type {import('@adonisjs/lucid/src/Schema')} */
 const Schema = use('Schema');
-const ufs = require('../data/address/ufs');
+const address = require('../data/address');
 
 class AddressSchema extends Schema {
   up() {
@@ -15,7 +15,7 @@ class AddressSchema extends Schema {
       table.string('cep');
       table.string('complement');
       table.string('city').notNullable();
-      table.enu('uf', ufs).notNullable();
+      table.enu('uf', address.ufs).notNullable();
       table.timestamps();
     });
   }
