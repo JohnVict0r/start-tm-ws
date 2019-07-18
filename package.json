@@ -8,7 +8,7 @@
     "start": "node server.js",
     "test": "node ace test",
     "dev": "adonis serve --dev --debug",
-    "seed": "adonis seed --files=\"PermissionSeeder.js, RoleSeeder.js, UserSeeder.js\""
+    "seed": "adonis seed"
   },
   "keywords": [
     "adonisjs",
