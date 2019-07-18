@@ -33,7 +33,7 @@ Route.resource('users', 'UserController')
   .middleware(
     new Map([
       [['index', 'show', 'update', 'destroy'], ['auth', `is:${roles.adm}`]],
-      [['show'], ['auth', `is:(${roles.adm} || ${roles.gst})`]]
+      [['show'], ['auth', `is:(${roles.adm} or ${roles.gst})`]]
     ])
   );
 
@@ -65,7 +65,7 @@ Route.resource('athletes', 'AthleteController')
     new Map([
       [
         ['store', 'update', 'destroy'],
-        ['auth', `is:(${roles.adm} || ${roles.fed} || ${roles.club})`]
+        ['auth', `is:(${roles.adm} or ${roles.fed} or ${roles.club})`]
       ]
     ])
   );
@@ -80,7 +80,7 @@ Route.resource('ttevents', 'TTEventController')
     new Map([
       [
         ['store', 'update', 'destroy'],
-        ['auth', `is:(${roles.fed} || ${roles.adm} || ${roles.club})`]
+        ['auth', `is:(${roles.fed} or ${roles.adm} or ${roles.club})`]
       ]
     ])
   );
@@ -94,7 +94,7 @@ Route.group(() => {
     new Map([
       [
         ['store', 'update', 'destroy'],
-        ['auth', `is:(${roles.fed} || ${roles.adm} || ${roles.club})`]
+        ['auth', `is:(${roles.fed} or ${roles.adm} or ${roles.club})`]
       ]
     ])
   );
@@ -107,7 +107,7 @@ Route.resource('championships', 'ChampionshipController')
     new Map([
       [
         ['store', 'update', 'destroy'],
-        ['auth', `is:(${roles.fed} || ${roles.adm} || ${roles.club})`]
+        ['auth', `is:(${roles.fed} or ${roles.adm} or ${roles.club})`]
       ]
     ])
   );
@@ -127,7 +127,7 @@ Route.group(() => {
     new Map([
       [
         ['store', 'update', 'destroy'],
-        ['auth', `is:(${roles.fed} || ${roles.adm} || ${roles.club})`]
+        ['auth', `is:(${roles.fed} or ${roles.adm} or ${roles.club})`]
       ]
     ])
   );
