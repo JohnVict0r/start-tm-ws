@@ -3,7 +3,10 @@ const Hash = use('Hash');
 
 class UserController {
   async index({ request }) {
-    return User.query().paginate(request.input('page', 1), request.input('perPage', 10));
+    const { page } = request.all();
+    return User.query()
+      .filter(request.all())
+      .paginate(page || 1, 10);
   }
 
   async show({ params }) {
