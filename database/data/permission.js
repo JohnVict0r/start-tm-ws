@@ -18,4 +18,4 @@ const data = {
   ]
 };
 
-module.exports = { ...data, slugs: Object.keys(data).flat() };
+module.exports = { ...data, slugs: Object.values(data).flat() };

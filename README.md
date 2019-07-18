@@ -25,13 +25,13 @@ $ adonis serve
 ### Seed
 
 ```
-$ yarn seed
+$ adonis seed
 ```
 
 OU
 
 ```
-$ npm run seed
+$ adonis seed
 ```
 
 ### Colaboradores
