@@ -7,8 +7,8 @@ class ClubFilter extends ModelFilter {
     return this.where('name', 'like', `%${name}%`);
   }
 
-  federation(id) {
-    return this.where('federation_id', id);
+  federation(federation_id) {
+    return this.where({ federation_id });
   }
 }
 
