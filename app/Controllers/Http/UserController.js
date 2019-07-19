@@ -3,9 +3,9 @@ const Hash = use('Hash');
 
 class UserController {
   async index({ request }) {
-    const { page } = request.all();
+    const { page, ...data } = request.all();
     return User.query()
-      .filter(request.all())
+      .filter(data)
       .paginate(page || 1, 10);
   }
 
