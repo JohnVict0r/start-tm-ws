@@ -8,7 +8,7 @@ class SubscriptionController {
   async store({ request }) {
     const { redirect_url, ...data } = request.only(Subscription.columns());
 
-    const token = await Hash.make(data.username + data.email + data.password);
+    const token = await Hash.make(data.email + data.password);
 
     await Subscription.create({ ...data, token });
 

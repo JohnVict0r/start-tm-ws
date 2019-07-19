@@ -22,12 +22,11 @@ class UserController {
 
     const subscription = await Subscription.findByOrFail('token', subscriptionToken);
 
-    const { password, username, email } = subscription;
+    const { password, email } = subscription;
 
     const hashPass = await Hash.make(password);
 
     const user = await User.create({
-      username,
       email,
       password: hashPass
     });

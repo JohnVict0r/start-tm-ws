@@ -6,10 +6,6 @@ class SubscriptionSchema extends Schema {
     this.create('subscriptions', (table) => {
       table.increments();
       table
-        .string('username', 80)
-        .notNullable()
-        .unique();
-      table
         .string('email', 254)
         .notNullable()
         .unique();
