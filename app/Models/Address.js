@@ -5,6 +5,10 @@ class Address extends Model {
   static boot() {
     super.boot();
   }
+
+  static columns() {
+    return ['street', 'number', 'neighborhood', 'cep', 'complement', 'city', 'uf'];
+  }
 }
 
 module.exports = Address;
