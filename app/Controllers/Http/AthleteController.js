@@ -2,7 +2,10 @@ const { Athlete } = use('App/Models');
 
 class AthleteController {
   async index({ request }) {
-    return Athlete.query().paginate(request.input('page', 1), request.input('perPage', 10));
+    const { page, ...data } = request.all();
+    return Athlete.query()
+      .filter(data)
+      .paginate(page || 1, 10);
   }
 
   async show({ params }) {
