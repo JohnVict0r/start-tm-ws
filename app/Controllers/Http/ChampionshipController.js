@@ -1,9 +1,11 @@
 const { Championship } = use('App/Models');
 
 class ChampionshipController {
-  async index() {
-    const championships = await Championship.all();
-    return championships;
+  async index({ request }) {
+    const { page, ...data } = request.all();
+    return Championship.query()
+      .filter(data)
+      .paginate(page || 1, 10);
   }
 
   async store({ request }) {

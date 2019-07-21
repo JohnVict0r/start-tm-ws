@@ -1,11 +1,15 @@
+'use strict';
+
 /** @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
 const Model = use('Model');
 
 const { base, ttevent, championship } = use('App/Utils/ModelsPath');
+const TTEventFilter = use('App/ModelFilters/TTEventFilter');
 
 class TTEvent extends Model {
   static boot() {
     super.boot();
+    this.addTrait('@provider:Filterable', TTEventFilter);
   }
 
   static get table() {

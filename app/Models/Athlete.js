@@ -1,11 +1,15 @@
+'use strict';
+
 /** @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
 const Model = use('Model');
 
 const { base, championship } = use('App/Utils/ModelsPath');
+const AthleteFilter = use('App/ModelFilters/AthleteFilter');
 
 class Athlete extends Model {
   static boot() {
     super.boot();
+    this.addTrait('@provider:Filterable', AthleteFilter);
   }
 
   static columns() {

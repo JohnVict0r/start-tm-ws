@@ -1,9 +1,14 @@
-const { TTEvent, Address, User } = use('App/Models');
+'use strict';
+
+const { TTEvent, Address } = use('App/Models');
 const Database = use('Database');
 
 class TTEventController {
   async index({ request }) {
-    return TTEvent.query().paginate(request.input('page', 1), request.input('perPage', 10));
+    const { page, ...data } = request.all();
+    return TTEvent.query()
+      .filter(data)
+      .paginate(page || 1, 10);
   }
 
   async store({ request }) {

@@ -1,8 +1,13 @@
+'use strict';
+
 const { Federation } = use('App/Models');
 
 class FederationController {
   async index({ request }) {
-    return Federation.query().paginate(request.input('page', 1), request.input('perPage', 10));
+    const { page, ...data } = request.all();
+    return Federation.query()
+      .filter(data)
+      .paginate(page || 1, 10);
   }
 
   async store({ request }) {

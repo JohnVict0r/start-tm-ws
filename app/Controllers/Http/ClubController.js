@@ -1,12 +1,14 @@
+'use strict';
+
 const { Club, Address } = use('App/Models');
 const Database = use('Database');
 
 class ClubController {
   async index({ request }) {
-    const { page } = request.all();
+    const { page, ...data } = request.all();
     return Club.query()
       .with('address')
-      .filter(request.all())
+      .filter(data)
       .paginate(page || 1, 10);
   }
 

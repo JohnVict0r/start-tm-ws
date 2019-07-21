@@ -1,9 +1,14 @@
-const { Person, User, Address } = use('App/Models');
+'use strict';
+
+const { Person, Address } = use('App/Models');
 const Database = use('Database');
 
 class PersonController {
   async index({ request }) {
-    return Person.query().paginate(request.input('page', 1), request.input('perPage', 10));
+    const { page, ...data } = request.all();
+    return Person.query()
+      .filter(data)
+      .paginate(page || 1, 10);
   }
 
   async store({ request }) {
