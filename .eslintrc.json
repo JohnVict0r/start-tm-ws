@@ -18,6 +18,7 @@
     "class-methods-use-this": "off",
     "camelcase": "off",
     "strict": ["off", "global"],
-    "comma-dangle": "off"
+    "comma-dangle": "off",
+    "arrow-parens": "off"
   }
 }
