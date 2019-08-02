@@ -10,17 +10,30 @@ const roles = require('../database/data/role').slugs;
 // Permissions
 Route.resource('permissions', `${auth}/PermissionController`)
   .apiOnly()
-  .middleware(new Map([[['index', 'store', 'update', 'destroy'], ['auth', `is:${roles.adm}`]]]));
+  .middleware(
+    new Map([
+      [['index', 'store', 'update', 'destroy'], ['auth', `is:${roles.adm}`]]
+    ])
+  );
 
 // Roles
 Route.resource('roles', `${auth}/RoleController`)
   .apiOnly()
-  .middleware(new Map([[['index', 'store', 'update', 'destroy'], ['auth', `is:${roles.adm}`]]]));
+  .middleware(
+    new Map([
+      [['index', 'store', 'update', 'destroy'], ['auth', `is:${roles.adm}`]]
+    ])
+  );
 
 // Sessions
 Route.resource('sessions', `${auth}/SessionController`)
   .apiOnly()
-  .middleware(new Map([[['index', 'update', 'destroy'], ['auth', `is:${roles.adm}`]]]));
+  .middleware(
+    new Map([
+      [['index', 'update', 'destroy'], ['auth', `is:${roles.adm}`]],
+      [['show'], ['auth']]
+    ])
+  );
 
 // Subscriptions
 Route.post('/subscriptions', `${auth}/SubscriptionController.store`).validator(
@@ -46,20 +59,29 @@ Route.resource('addresses', 'AddressController')
 Route.resource('people', 'PersonController')
   .apiOnly()
   .validator(new Map([[['people.store'], ['Person/Store']]]))
-  .middleware(new Map([[['store', 'update', 'destroy'], ['auth', `is:${roles.adm}`]]]));
+  .middleware(
+    new Map([[['store', 'update', 'destroy'], ['auth', `is:${roles.adm}`]]])
+  );
 
 // Federations
 Route.resource('federations', 'FederationController')
   .apiOnly()
   .validator(new Map([[['federations.store'], ['Federation/Store']]]))
-  .middleware(new Map([[['store', 'update', 'destroy'], ['auth', `is:${roles.adm}`]]]));
+  .middleware(
+    new Map([[['store', 'update', 'destroy'], ['auth', `is:${roles.adm}`]]])
+  );
 
 // Clubs
 Route.resource('clubs', 'ClubController')
   .apiOnly()
   .validator(new Map([[['clubs.store'], ['Club/Store']]]))
   .middleware(
-    new Map([[['store', 'update', 'destroy'], ['auth', `is:(${roles.adm} or ${roles.fed})`]]])
+    new Map([
+      [
+        ['store', 'update', 'destroy'],
+        ['auth', `is:(${roles.adm} or ${roles.fed})`]
+      ]
+    ])
   );
 
 // Athletes
@@ -122,7 +144,10 @@ Route.group(() => {
   Route.resource('confronts', `${ttevent}/ConfrontController`).apiOnly();
 
   // Athlete Inscription
-  Route.resource('athlete-inscriptions', `${championship}/AthleteInscriptionController`).apiOnly();
+  Route.resource(
+    'athlete-inscriptions',
+    `${championship}/AthleteInscriptionController`
+  ).apiOnly();
 
   // Group
   Route.resource('groups', `${championship}/GroupController`).apiOnly();
