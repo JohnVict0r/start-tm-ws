@@ -3,6 +3,10 @@
 const { Address } = use('App/Models');
 
 class AddressController {
+  async show({ params }) {
+    return Address.findOrFail(params.id);
+  }
+
   async update({ request, params }) {
     const data = request.only(Address.columns());
 

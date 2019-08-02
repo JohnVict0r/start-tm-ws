@@ -52,7 +52,7 @@ Route.resource('users', 'UserController')
 
 // Address
 Route.resource('addresses', 'AddressController')
-  .only(['update'])
+  .only(['show', 'update'])
   .middleware(new Map([[['update'], ['auth']]]));
 
 // People
