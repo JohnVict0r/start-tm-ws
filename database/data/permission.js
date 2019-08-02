@@ -23,6 +23,4 @@ const data = {
   ]
 };
 
-const slugs = [].concat.apply([], Object.values(data));
-
-module.exports = { ...data, slugs };
+module.exports = { ...data, slugs: [].concat.apply([], Object.values(data)) };
