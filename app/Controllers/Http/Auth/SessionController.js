@@ -3,8 +3,9 @@ class SessionController {
     const { email, password } = request.all();
 
     const token = await auth.withRefreshToken().attempt(email, password);
+    const user = await auth.getUser();
 
-    return token;
+    return { user, token };
   }
 }
 
