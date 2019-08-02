@@ -19,6 +19,7 @@
     "camelcase": "off",
     "strict": ["off", "global"],
     "comma-dangle": "off",
-    "arrow-parens": "off"
+    "arrow-parens": "off",
+    "prefer-spread": "off"
   }
 }

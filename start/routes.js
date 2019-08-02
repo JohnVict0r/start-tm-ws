@@ -28,7 +28,12 @@ Route.resource('roles', `${auth}/RoleController`)
 // Sessions
 Route.resource('sessions', `${auth}/SessionController`)
   .apiOnly()
-  .middleware(new Map([[['index', 'update', 'destroy'], ['auth']]]));
+  .middleware(
+    new Map([
+      [['index', 'update', 'destroy'], ['auth', `is:${roles.adm}`]],
+      [['show'], ['auth']]
+    ])
+  );
 
 // Subscriptions
 Route.post('/subscriptions', `${auth}/SubscriptionController.store`).validator(
