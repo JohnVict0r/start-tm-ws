@@ -30,6 +30,7 @@
     "@adonisjs/mail": "^3.0.9",
     "@adonisjs/validator": "^5.0.6",
     "adonis-lucid-filter": "^1.0.4",
+    "axios": "^0.19.0",
     "sqlite3": "^4.0.6"
   },
   "devDependencies": {

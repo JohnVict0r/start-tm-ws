@@ -11,8 +11,9 @@ class AthleteInscriptionController {
   async store({ request, params }) {
     const { championships_id } = params;
 
-    const { approved, ...data } = request.only(AthleteInscription.columns());
+    const data = request.only(AthleteInscription.columns());
     data.championship_id = championships_id;
+    data.approved = true;
 
     const inscription = await AthleteInscription.create(data);
 
@@ -29,8 +30,8 @@ class AthleteInscriptionController {
 
   async update({ params, request }) {
     const {
-      championship_id, approved, athlete_id, ...data
-    } = request.only(
+ championship_id, approved, athlete_id, ...data 
+} = request.only(
       AthleteInscription.columns()
     );
 

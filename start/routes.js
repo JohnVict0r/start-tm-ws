@@ -2,7 +2,9 @@
 
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route');
-Route.get('/', async () => {});
+const axios = require('axios').default;
+
+Route.get('/', async () => 'asfsa');
 
 const { auth, ttevent, championship } = use('App/Utils/ControllersPath');
 const roles = require('../database/data/role').slugs;
@@ -161,3 +163,16 @@ Route.group(() => {
       ]
     ])
   );
+
+Route.get('states', async () => {
+  const response = await axios.get(
+    'https://servicodados.ibge.gov.br/api/v1/localidades/estados'
+  );
+
+  const states = response.data.map((item) => {
+    const { regiao, ...estado } = item;
+    return estado;
+  });
+
+  return states;
+});
