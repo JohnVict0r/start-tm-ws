@@ -176,3 +176,16 @@ Route.get('states', async () => {
 
   return states;
 });
+
+Route.get('states/:state_id/cities', async ({ params: { state_id } }) => {
+  const response = await axios.get(
+    `https://servicodados.ibge.gov.br/api/v1/localidades/estados/${state_id}/municipios`
+  );
+
+  const cities = response.data.map((item) => {
+    const { microrregiao, ...city } = item;
+    return city;
+  });
+
+  return cities;
+});
