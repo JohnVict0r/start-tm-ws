@@ -2,7 +2,6 @@
 
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route');
-const axios = require('axios').default;
 
 Route.get('/', async () => 'asfsa');
 
@@ -164,28 +163,4 @@ Route.group(() => {
     ])
   );
 
-Route.get('states', async () => {
-  const response = await axios.get(
-    'https://servicodados.ibge.gov.br/api/v1/localidades/estados'
-  );
-
-  const states = response.data.map((item) => {
-    const { regiao, ...estado } = item;
-    return estado;
-  });
-
-  return states;
-});
-
-Route.get('states/:state_id/cities', async ({ params: { state_id } }) => {
-  const response = await axios.get(
-    `https://servicodados.ibge.gov.br/api/v1/localidades/estados/${state_id}/municipios`
-  );
-
-  const cities = response.data.map((item) => {
-    const { microrregiao, ...city } = item;
-    return city;
-  });
-
-  return cities;
-});
+Route.resource('states', 'StateController').only(['index', 'show']);
