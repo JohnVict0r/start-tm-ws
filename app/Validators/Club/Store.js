@@ -8,7 +8,7 @@ class ClubStore {
       // 'address.street': 'required',
       'address.number': 'integer',
       // 'address.neighborhood': 'required',
-      'address.cep': 'integer',
+      'address.cep': 'required',
       'address.city': 'required',
       'address.uf': 'required'
     };
