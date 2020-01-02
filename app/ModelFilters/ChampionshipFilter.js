@@ -3,6 +3,10 @@
 const ModelFilter = use('ModelFilter');
 
 class ChampionshipFilter extends ModelFilter {
+  name(name) {
+    return this.where('name', 'like', `%${name}%`);
+  }
+
   sex(sex) {
     return this.where({ sex });
   }
