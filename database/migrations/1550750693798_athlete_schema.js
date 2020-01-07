@@ -5,12 +5,7 @@ class AthleteSchema extends Schema {
   up() {
     this.create('athletes', (table) => {
       table.increments();
-      table
-        .integer('user_id')
-        .unsigned()
-        .notNullable()
-        .unique()
-        .references('users.id');
+      table.integer('people_id').references('people.id');
       table
         .integer('rating')
         .unsigned()

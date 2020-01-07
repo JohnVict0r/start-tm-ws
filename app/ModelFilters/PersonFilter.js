@@ -22,10 +22,6 @@ class PersonFilter extends ModelFilter {
   rg(rg) {
     return this.where({ rg });
   }
-
-  user(user_id) {
-    return this.where({ user_id });
-  }
 }
 
 module.exports = PersonFilter;

@@ -13,11 +13,7 @@ class Person extends Model {
   }
 
   static columns() {
-    return ['name', 'sex', 'birth', 'cpf', 'rg', 'address', 'user_id'];
-  }
-
-  user() {
-    return this.belongsTo(`${base}/User`);
+    return ['name', 'sex', 'birth', 'cpf', 'rg', 'address'];
   }
 
   address() {

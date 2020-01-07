@@ -13,15 +13,15 @@ class Athlete extends Model {
   }
 
   static columns() {
-    return ['rating', 'club_id', 'user_id'];
+    return ['rating', 'club_id', 'person_id'];
   }
 
   championshipInscriptions() {
     return this.hasMany(`${championship}/AthleteInscription`);
   }
 
-  user() {
-    return this.belongsTo(`${base}/User`);
+  person() {
+    return this.belongsTo(`${base}/Person`);
   }
 
   club() {

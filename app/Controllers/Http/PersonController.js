@@ -29,13 +29,13 @@ class PersonController {
   async show({ params }) {
     const person = await Person.findOrFail(params.id);
 
-    await person.loadMany(['address', 'user']);
+    await person.loadMany(['address']);
 
     return person;
   }
 
   async update({ params, request }) {
-    const { address, user_id, ...data } = request.only(Person.columns());
+    const { address, ...data } = request.only(Person.columns());
 
     const person = await Person.findOrFail(params.id);
 

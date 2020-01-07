@@ -1,4 +1,5 @@
 const { Athlete } = use('App/Models');
+const Database = use('Database');
 
 class AthleteController {
   async index({ request }) {
@@ -11,7 +12,7 @@ class AthleteController {
   async show({ params }) {
     const athlete = await Athlete.findOrFail(params.id);
 
-    await athlete.loadMany(['user', 'club', 'championshipInscriptions']);
+    await athlete.loadMany(['person', 'club', 'championshipInscriptions']);
 
     return athlete;
   }
@@ -22,7 +23,7 @@ class AthleteController {
   }
 
   async update({ params, request }) {
-    const { user_id, ...data } = request.only(Athlete.columns());
+    const { person_id, ...data } = request.only(Athlete.columns());
 
     const athlete = await Athlete.findOrFail(params.id);
 
@@ -35,9 +36,6 @@ class AthleteController {
 
   async destroy({ params }) {
     const athlete = await Athlete.findOrFail(params.id);
-
-    // TODO quando o atleta for deletado para um usuário
-    // o usuário deve perder o "role" de "[Athlete]"
 
     return athlete.delete();
   }
