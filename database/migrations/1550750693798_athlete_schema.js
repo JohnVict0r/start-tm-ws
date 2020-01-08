@@ -5,7 +5,7 @@ class AthleteSchema extends Schema {
   up() {
     this.create('athletes', (table) => {
       table.increments();
-      table.integer('people_id').references('people.id');
+      table.integer('person_id').references('people.id');
       table
         .integer('rating')
         .unsigned()
