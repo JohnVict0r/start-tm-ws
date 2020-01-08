@@ -7,9 +7,8 @@ const { base, ttevent, championship } = use('App/Utils/ModelsPath');
 const TTEventFilter = use('App/ModelFilters/TTEventFilter');
 
 class TTEvent extends Model {
-  static boot() {
-    super.boot();
-    this.addTrait('@provider:Filterable', TTEventFilter);
+  static get computed() {
+    return ['active'];
   }
 
   static get table() {
@@ -28,6 +27,19 @@ class TTEvent extends Model {
       'championships',
       'tables'
     ];
+  }
+
+  static boot() {
+    super.boot();
+    this.addTrait('@provider:Filterable', TTEventFilter);
+  }
+
+  getActive({ end, start }) {
+    const startDate = new Date(start);
+    const endDate = new Date(end);
+    const now = new Date();
+
+    return startDate <= now && now <= endDate;
   }
 
   owner() {
