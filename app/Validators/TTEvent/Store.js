@@ -11,10 +11,10 @@ class TTEventStore {
       'address.street': 'required',
       'address.number': 'required|integer',
       'address.neighborhood': 'required',
-      'address.cep': 'required|integer',
+      'address.cep': 'required',
       'address.city': 'required',
       'address.uf': 'required',
-      'entries.*.type': 'required', // TODO definir types
+      'entries.*.type': 'required|in:R,K,RK,KK,RKK',
       'entries.*.price': 'required', // TODO pegar valor double ou float
       'championships.*.sex': 'required|in:M,F',
       'championships.*.type': 'required', // TODO definir types, unique

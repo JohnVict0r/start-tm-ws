@@ -23,7 +23,10 @@ Route.resource('users', 'UserController')
   .apiOnly()
   .middleware(
     new Map([
-      [['index', 'show', 'update', 'destroy'], ['auth', `is:${roles.adm}`]],
+      [
+        ['index', 'show', 'update', 'destroy'],
+        ['auth', `is:${roles.adm}`]
+      ],
       [['show'], ['auth', `is:(${roles.adm} or ${roles.gst})`]]
     ])
   );
@@ -36,17 +39,19 @@ Route.resource('addresses', 'AddressController')
 // People
 Route.resource('people', 'PersonController')
   .apiOnly()
-  .validator(new Map([[['people.store'], ['Person/Store']]]))
-  .middleware(
-    new Map([[['store', 'update', 'destroy'], ['auth', `is:${roles.adm}`]]])
-  );
+  .middleware(new Map([[['update'], ['auth', `is:${roles.adm}`]]]));
 
 // Federations
 Route.resource('federations', 'FederationController')
   .apiOnly()
   .validator(new Map([[['federations.store'], ['Federation/Store']]]))
   .middleware(
-    new Map([[['store', 'update', 'destroy'], ['auth', `is:${roles.adm}`]]])
+    new Map([
+      [
+        ['store', 'update', 'destroy'],
+        ['auth', `is:${roles.adm}`]
+      ]
+    ])
   );
 
 // Clubs
@@ -65,7 +70,6 @@ Route.resource('clubs', 'ClubController')
 // Athletes
 Route.resource('athletes', 'AthleteController')
   .apiOnly()
-  .validator(new Map([[['athletes.store'], ['Athlete/Store']]]))
   .middleware(
     new Map([
       [

@@ -16,16 +16,15 @@ class User extends Model {
     return this.hasMany(`${base}/Token`);
   }
 
-  person() {
-    return this.hasOne(`${base}/Person`);
-  }
-
   athlete() {
     return this.hasOne(`${base}/Athlete`);
   }
 
   static get traits() {
-    return ['@provider:Adonis/Acl/HasRole', '@provider:Adonis/Acl/HasPermission'];
+    return [
+      '@provider:Adonis/Acl/HasRole',
+      '@provider:Adonis/Acl/HasPermission'
+    ];
   }
 }
 

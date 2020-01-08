@@ -12,7 +12,7 @@ class UserController {
   async show({ params }) {
     const user = await User.findOrFail(params.id);
 
-    await user.loadMany(['person', 'athlete', 'roles']);
+    await user.loadMany(['athlete', 'roles']);
 
     return user;
   }
@@ -20,7 +20,10 @@ class UserController {
   async store({ request }) {
     const subscriptionToken = request.input('subscription_token');
 
-    const subscription = await Subscription.findByOrFail('token', subscriptionToken);
+    const subscription = await Subscription.findByOrFail(
+      'token',
+      subscriptionToken
+    );
 
     const { password, email } = subscription;
 

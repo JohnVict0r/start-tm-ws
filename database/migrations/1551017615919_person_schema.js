@@ -6,14 +6,6 @@ class PersonSchema extends Schema {
     this.create('people', (table) => {
       table.increments();
       table
-        .integer('user_id')
-        .unsigned()
-        .references('users.id')
-        .notNullable()
-        .unique()
-        .onUpdate('CASCADE')
-        .onDelete('CASCADE');
-      table
         .integer('address_id')
         .unsigned()
         .references('addresses.id')
