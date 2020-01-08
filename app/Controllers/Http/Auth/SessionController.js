@@ -8,7 +8,7 @@ class SessionController {
   async show({ auth }) {
     const user = await auth.getUser();
 
-    await user.loadMany(['person', 'roles']);
+    await user.loadMany(['roles']);
 
     return user;
   }
