@@ -9,7 +9,6 @@ class PersonSchema extends Schema {
         .integer('address_id')
         .unsigned()
         .references('addresses.id')
-        .notNullable()
         .onUpdate('CASCADE')
         .onDelete('CASCADE');
       table.string('name').notNullable();
@@ -17,10 +16,6 @@ class PersonSchema extends Schema {
       table.date('birth').notNullable();
       table
         .string('cpf', 11)
-        .notNullable()
-        .unique();
-      table
-        .string('rg')
         .notNullable()
         .unique();
       table.timestamps();

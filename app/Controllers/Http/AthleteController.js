@@ -1,4 +1,4 @@
-const { Athlete } = use('App/Models');
+const { Athlete, Person } = use('App/Models');
 const Database = use('Database');
 
 class AthleteController {
@@ -19,7 +19,18 @@ class AthleteController {
 
   async store({ request }) {
     const data = request.only(Athlete.columns());
-    return Athlete.create(data);
+    const person = request.input('person');
+
+    const trx = await Database.beginTransaction();
+
+    const { id: person_id } = await Person.create(person, trx);
+    data.person_id = person_id;
+
+    const athlete = await Athlete.create(data, trx);
+
+    await trx.commit();
+
+    return athlete;
   }
 
   async update({ params, request }) {
