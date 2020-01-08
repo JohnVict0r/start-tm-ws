@@ -11,7 +11,7 @@ class ChampionshipSchema extends Schema {
         .unsigned()
         .references('ttevents.id');
       table.string('name').notNullable();
-      table.enu('sex', ['M', 'F']).notNullable();
+      table.enu('sex', ['M', 'F', 'X']).notNullable();
       table.enu('type', ['RAT', 'RAK']).notNullable();
       table
         .integer('upperLimit')
