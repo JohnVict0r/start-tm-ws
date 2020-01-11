@@ -21,7 +21,7 @@ class TTEvent extends Model {
       'type',
       'start',
       'end',
-      'owner_id',
+      'federation_id',
       'address',
       'entries',
       'championships',
@@ -42,8 +42,8 @@ class TTEvent extends Model {
     return startDate <= now && now <= endDate;
   }
 
-  owner() {
-    return this.belongsTo(`${base}/User`, 'owner_id', 'id');
+  federation() {
+    return this.belongsTo(`${base}/Federation`);
   }
 
   address() {

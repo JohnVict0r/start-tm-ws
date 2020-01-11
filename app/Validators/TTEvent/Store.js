@@ -3,13 +3,13 @@ const Antl = use('Antl');
 class TTEventStore {
   get rules() {
     return {
-      owner_id: 'required',
+      federation_id: 'required',
       type: 'required|in:school,state,intrastate,national,club',
       name: 'required',
       start: 'required|date',
       end: 'required|date',
       'address.street': 'required',
-      'address.number': 'required|integer',
+      'address.number': 'integer',
       'address.neighborhood': 'required',
       'address.cep': 'required',
       'address.city': 'required',
