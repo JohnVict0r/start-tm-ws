@@ -7,10 +7,7 @@ class AddressSchema extends Schema {
     this.create('addresses', (table) => {
       table.increments();
       table.string('street');
-      table
-        .integer('number')
-        .notNullable()
-        .unsigned();
+      table.integer('number').unsigned();
       table.string('neighborhood');
       table.string('cep');
       table.string('complement');

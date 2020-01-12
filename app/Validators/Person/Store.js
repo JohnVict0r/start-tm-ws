@@ -9,10 +9,7 @@ class PersonStore {
       birth: 'required', // TODO date valido
       cpf: 'required',
       rg: 'required',
-      'address.street': 'required',
-      'address.number': 'required|integer',
-      'address.neighborhood': 'required',
-      'address.cep': 'required',
+      'address.number': 'integer',
       'address.city': 'required',
       'address.uf': 'required'
     };

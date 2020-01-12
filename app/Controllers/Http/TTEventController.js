@@ -12,9 +12,9 @@ class TTEventController {
   }
 
   async store({ request }) {
-    const {
-      address, entries, championships, tables, ...data
-    } = request.only(TTEvent.columns());
+    const { address, entries, championships, tables, ...data } = request.only(
+      TTEvent.columns()
+    );
 
     const trx = await Database.beginTransaction();
 
@@ -33,14 +33,20 @@ class TTEventController {
 
   async show({ params }) {
     const ttevent = await TTEvent.findOrFail(params.id);
-    await ttevent.loadMany(['owner', 'address', 'entries', 'championships', 'tables']);
+    await ttevent.loadMany([
+      'federation',
+      'address',
+      'entries',
+      'championships',
+      'tables'
+    ]);
     return ttevent;
   }
 
   async update({ params, request }) {
-    const {
-      address, entries, championships, tables, ...data
-    } = request.only(TTEvent.columns());
+    const { address, entries, championships, tables, ...data } = request.only(
+      TTEvent.columns()
+    );
 
     const ttevent = await TTEvent.findOrFail(params.id);
 

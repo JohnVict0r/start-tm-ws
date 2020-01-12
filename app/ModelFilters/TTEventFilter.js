@@ -19,8 +19,8 @@ class TTEventFilter extends ModelFilter {
     return this.where('end', 'like', `%${end}%`);
   }
 
-  owner(owner_id) {
-    return this.where({ owner_id });
+  federation(federation_id) {
+    return this.where({ federation_id });
   }
 
   address(address_id) {

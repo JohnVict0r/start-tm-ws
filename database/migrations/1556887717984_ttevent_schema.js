@@ -11,12 +11,10 @@ class TTEventSchema extends Schema {
       table.datetime('start').notNullable();
       table.datetime('end').notNullable();
       table
-        .integer('owner_id')
-        .unsigned()
+        .integer('federation_id')
         .notNullable()
-        .references('users.id')
-        .onUpdate('CASCADE')
-        .onDelete('CASCADE');
+        .unsigned()
+        .references('federations.id');
       table
         .integer('address_id')
         .notNullable()
