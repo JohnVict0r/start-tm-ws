@@ -10,7 +10,7 @@ const roles = require('../../database/data/role').slugs;
  */
 Route.resource('ttevents', 'TTEventController')
   .apiOnly()
-  .validator(new Map([[['ttevents.store'], ['TTEvent/Store']]]))
+  //  .validator(new Map([[['ttevents.store'], ['TTEvent/Store']]]))
   .middleware(
     new Map([
       [

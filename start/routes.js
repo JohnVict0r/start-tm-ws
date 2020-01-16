@@ -44,7 +44,7 @@ Route.resource('people', 'PersonController')
 // Federations
 Route.resource('federations', 'FederationController')
   .apiOnly()
-  .validator(new Map([[['federations.store'], ['Federation/Store']]]))
+  // .validator(new Map([[['federations.store'], ['Federation/Store']]]))
   .middleware(
     new Map([
       [
@@ -57,7 +57,7 @@ Route.resource('federations', 'FederationController')
 // Clubs
 Route.resource('clubs', 'ClubController')
   .apiOnly()
-  .validator(new Map([[['clubs.store'], ['Club/Store']]]))
+  // .validator(new Map([[['clubs.store'], ['Club/Store']]]))
   .middleware(
     new Map([
       [
