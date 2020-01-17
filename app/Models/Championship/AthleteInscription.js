@@ -11,7 +11,7 @@ class AthleteInscription extends Model {
   }
 
   static columns() {
-    return ['athlete_id', 'group_id', 'championship_id', 'approved'];
+    return ['athlete_id', 'championship_id', 'approved'];
   }
 
   athlete() {
@@ -20,10 +20,6 @@ class AthleteInscription extends Model {
 
   championship() {
     return this.belongsTo(`${championship}`);
-  }
-
-  group() {
-    return this.belongsTo(`${championship}/Group`);
   }
 }
 
