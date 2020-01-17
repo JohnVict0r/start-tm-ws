@@ -19,7 +19,11 @@ class ChampionshipController {
   async show({ params }) {
     const championship = await Championship.findOrFail(params.id);
 
-    await championship.loadMany(['athleteInscriptions']);
+    await championship.loadMany(['athleteInscriptions', 'confronts']);
+
+    championship.allConfrontsFinalized = championship.confronts.find(
+      (i) => !i.finalized
+    );
 
     return championship;
   }
