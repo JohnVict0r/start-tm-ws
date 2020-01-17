@@ -16,7 +16,7 @@ class Confront extends Model {
       'arbiter',
       'phase',
       'table_id',
-      'active',
+      'finalized',
       'championship_id'
     ];
   }

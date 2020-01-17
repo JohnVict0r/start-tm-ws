@@ -27,7 +27,7 @@ class ConfrontSchema extends Schema {
         .onUpdate('cascade');
       table.string('arbiter').notNullable();
       table
-        .boolean('active')
+        .boolean('finalized')
         .notNullable()
         .defaultTo(false);
       table.enu('phase', confront.phases).defaultTo(confront.phases[0]);
