@@ -21,9 +21,10 @@ class ChampionshipController {
 
     await championship.loadMany(['athleteInscriptions', 'confronts']);
 
-    championship.allConfrontsFinalized = !!championship.confronts.find(
-      (i) => !i.finalized
-    );
+    championship.allConfrontsFinalized = !championship
+      .getRelated('confronts')
+      .toJSON()
+      .find((i) => !i.finalized);
 
     return championship;
   }

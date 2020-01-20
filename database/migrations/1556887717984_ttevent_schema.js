@@ -10,7 +10,6 @@ class TTEventSchema extends Schema {
       table.string('name').notNullable();
       table.datetime('startInscription').notNullable();
       table.datetime('endInscription').notNullable();
-      table.datetime('end').notNullable();
       table.datetime('start').notNullable();
       table.datetime('end').notNullable();
       table
