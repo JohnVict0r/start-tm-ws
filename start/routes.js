@@ -14,69 +14,64 @@ require('./routes/auth_rotes');
 require('./routes/ttevent_routes');
 
 // Subscriptions
-Route.post('/subscriptions', `${auth}/SubscriptionController.store`).validator(
-  `${auth}/Subscription/Store`
-);
+Route.post('/subscriptions', `${auth}/SubscriptionController.store`);
+// .validator(
+//   `${auth}/Subscription/Store`
+// );
 
 // Users
-Route.resource('users', 'UserController')
-  .apiOnly()
-  .middleware(
-    new Map([
-      [
-        ['index', 'show', 'update', 'destroy'],
-        ['auth', `is:${roles.adm}`]
-      ],
-      [['show'], ['auth', `is:(${roles.adm} or ${roles.gst})`]]
-    ])
-  );
+Route.resource('users', 'UserController').apiOnly();
+// .middleware(
+//   new Map([
+//     [
+//       ['index', 'show', 'update', 'destroy'],
+//       ['auth', `is:${roles.adm}`]
+//     ],
+//     [['show'], ['auth', `is:(${roles.adm} or ${roles.gst})`]]
+//   ])
+// );
 
 // Address
-Route.resource('addresses', 'AddressController')
-  .only(['show', 'update'])
-  .middleware(new Map([[['update'], ['auth']]]));
+Route.resource('addresses', 'AddressController').only(['show', 'update']);
+// .middleware(new Map([[['update'], ['auth']]]));
 
 // People
-Route.resource('people', 'PersonController')
-  .apiOnly()
-  .middleware(new Map([[['update'], ['auth', `is:${roles.adm}`]]]));
+Route.resource('people', 'PersonController').apiOnly();
+// .middleware(new Map([[['update'], ['auth', `is:${roles.adm}`]]]));
 
 // Federations
-Route.resource('federations', 'FederationController')
-  .apiOnly()
-  // .validator(new Map([[['federations.store'], ['Federation/Store']]]))
-  .middleware(
-    new Map([
-      [
-        ['store', 'update', 'destroy'],
-        ['auth', `is:${roles.adm}`]
-      ]
-    ])
-  );
+Route.resource('federations', 'FederationController').apiOnly();
+// .validator(new Map([[['federations.store'], ['Federation/Store']]]))
+// .middleware(
+//   new Map([
+//     [
+//       ['store', 'update', 'destroy'],
+//       ['auth', `is:${roles.adm}`]
+//     ]
+//   ])
+// );
 
 // Clubs
-Route.resource('clubs', 'ClubController')
-  .apiOnly()
-  // .validator(new Map([[['clubs.store'], ['Club/Store']]]))
-  .middleware(
-    new Map([
-      [
-        ['store', 'update', 'destroy'],
-        ['auth', `is:(${roles.adm} or ${roles.fed})`]
-      ]
-    ])
-  );
+Route.resource('clubs', 'ClubController').apiOnly();
+// .validator(new Map([[['clubs.store'], ['Club/Store']]]))
+// .middleware(
+//   new Map([
+//     [
+//       ['store', 'update', 'destroy'],
+//       ['auth', `is:(${roles.adm} or ${roles.fed})`]
+//     ]
+//   ])
+// );
 
 // Athletes
-Route.resource('athletes', 'AthleteController')
-  .apiOnly()
-  .middleware(
-    new Map([
-      [
-        ['store', 'update', 'destroy'],
-        ['auth', `is:(${roles.adm} or ${roles.fed} or ${roles.club})`]
-      ]
-    ])
-  );
+Route.resource('athletes', 'AthleteController').apiOnly();
+// .middleware(
+//   new Map([
+//     [
+//       ['store', 'update', 'destroy'],
+//       ['auth', `is:(${roles.adm} or ${roles.fed} or ${roles.club})`]
+//     ]
+//   ])
+// );
 
 Route.resource('states', 'StateController').only(['index', 'show']);
