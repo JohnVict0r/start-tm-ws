@@ -8,7 +8,7 @@ const TTEventFilter = use('App/ModelFilters/TTEventFilter');
 
 class TTEvent extends Model {
   static get computed() {
-    return ['active'];
+    return ['active', 'acceptingInscriptions'];
   }
 
   static get table() {
@@ -19,6 +19,8 @@ class TTEvent extends Model {
     return [
       'name',
       'type',
+      'startInscription',
+      'endInscription',
       'start',
       'end',
       'federation_id',
@@ -37,6 +39,14 @@ class TTEvent extends Model {
   getActive({ end, start }) {
     const startDate = new Date(start);
     const endDate = new Date(end);
+    const now = new Date();
+
+    return startDate <= now && now <= endDate;
+  }
+
+  getAcceptingInscriptions({ startInscription, endInscription }) {
+    const startDate = new Date(startInscription);
+    const endDate = new Date(endInscription);
     const now = new Date();
 
     return startDate <= now && now <= endDate;

@@ -29,9 +29,7 @@ class AthleteInscriptionController {
   }
 
   async update({ params, request }) {
-    const {
- championship_id, approved, athlete_id, ...data 
-} = request.only(
+    const { championship_id, approved, athlete_id, ...data } = request.only(
       AthleteInscription.columns()
     );
 

@@ -21,6 +21,7 @@ class ChampionshipSchema extends Schema {
         .integer('downLimit')
         .notNullable()
         .unsigned();
+      table.boolean('active').defaultTo(false);
       table.timestamps();
     });
   }

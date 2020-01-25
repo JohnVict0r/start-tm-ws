@@ -26,6 +26,10 @@ class ConfrontSchema extends Schema {
         .references('athletes.id')
         .onUpdate('cascade');
       table.string('arbiter').notNullable();
+      table
+        .boolean('finalized')
+        .notNullable()
+        .defaultTo(false);
       table.enu('phase', confront.phases).defaultTo(confront.phases[0]);
       table
         .integer('table_id')

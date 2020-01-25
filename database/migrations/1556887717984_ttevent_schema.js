@@ -8,6 +8,8 @@ class TTEventSchema extends Schema {
       table.increments();
       table.enu('type', event.types).notNullable();
       table.string('name').notNullable();
+      table.datetime('startInscription').notNullable();
+      table.datetime('endInscription').notNullable();
       table.datetime('start').notNullable();
       table.datetime('end').notNullable();
       table
