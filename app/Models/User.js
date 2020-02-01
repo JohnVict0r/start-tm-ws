@@ -4,7 +4,7 @@
 const Model = use('Model');
 const UserFilter = use('App/ModelFilters/UserFilter');
 
-const { base } = use('App/Utils/ModelsPath');
+const { tokenPath, athletePath } = use('App/Utils/ModelsPath');
 
 class User extends Model {
   static boot() {
@@ -13,11 +13,11 @@ class User extends Model {
   }
 
   tokens() {
-    return this.hasMany(`${base}/Token`);
+    return this.hasMany(tokenPath);
   }
 
   athlete() {
-    return this.hasOne(`${base}/Athlete`);
+    return this.hasOne(athletePath);
   }
 
   static get traits() {

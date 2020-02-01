@@ -13,11 +13,11 @@
 /** @type {import('@adonisjs/lucid/src/Factory')} */
 const Factory = use('Factory');
 
-const { base } = use('App/Utils/ModelsPath');
+const { federationPath } = use('App/Utils/ModelsPath');
 
 class FederationSeeder {
   async run() {
-    const federations = await Factory.model(`${base}/Federation`).createMany(3);
+    const federations = await Factory.model(federationPath).createMany(3);
   }
 }
 

@@ -3,7 +3,7 @@
 /** @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
 const Model = use('Model');
 
-const { championship } = use('App/Utils/ModelsPath');
+const { confrontPath } = use('App/Utils/ModelsPath');
 
 class Table extends Model {
   static boot() {
@@ -15,7 +15,7 @@ class Table extends Model {
   }
 
   confronts() {
-    return this.hasMany(`${championship}/Confront`);
+    return this.hasMany(confrontPath);
   }
 }
 

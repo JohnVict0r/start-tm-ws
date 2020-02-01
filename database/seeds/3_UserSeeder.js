@@ -3,19 +3,19 @@
 const Factory = use('Factory');
 const Database = use('Database');
 
-const { base } = use('App/Utils/ModelsPath');
+const { userPath } = use('App/Utils/ModelsPath');
 const role = require('../data/role');
 
 class UserSeeder {
   async run() {
     let result = null;
     // Users
-    const admUser = await Factory.model(`${base}/User`).create({
+    const admUser = await Factory.model(userPath).create({
       email: 'admin@admin.com'
     });
 
-    const guestUser = await Factory.model(`${base}/User`).create();
-    const fedUser = await Factory.model(`${base}/User`).create();
+    const guestUser = await Factory.model(userPath).create();
+    const fedUser = await Factory.model(userPath).create();
 
     // With Roles
     result = await Database.select('id')

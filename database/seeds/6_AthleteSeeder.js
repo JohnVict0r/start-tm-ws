@@ -12,15 +12,15 @@
 
 /** @type {import('@adonisjs/lucid/src/Factory')} */
 const Factory = use('Factory');
-const { base } = use('App/Utils/ModelsPath');
+const { personPath, athletePath } = use('App/Utils/ModelsPath');
 const { Club } = use('App/Models');
 
 class AthleteSeeder {
   async run() {
     const clubs_id = await Club.ids();
 
-    const people = await Factory.model(`${base}/Person`).createMany(14);
-    const athletes = await Factory.model(`${base}/Athlete`).makeMany(14, {
+    const people = await Factory.model(personPath).createMany(14);
+    const athletes = await Factory.model(athletePath).makeMany(14, {
       clubs_id
     });
 

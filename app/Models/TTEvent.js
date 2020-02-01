@@ -3,7 +3,13 @@
 /** @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
 const Model = use('Model');
 
-const { base, ttevent, championship } = use('App/Utils/ModelsPath');
+const {
+  federationPath,
+  addressPath,
+  entryPath,
+  tablePath,
+  championshipPath
+} = use('App/Utils/ModelsPath');
 const TTEventFilter = use('App/ModelFilters/TTEventFilter');
 
 class TTEvent extends Model {
@@ -53,23 +59,23 @@ class TTEvent extends Model {
   }
 
   federation() {
-    return this.belongsTo(`${base}/Federation`);
+    return this.belongsTo(federationPath);
   }
 
   address() {
-    return this.belongsTo(`${base}/Address`);
+    return this.belongsTo(addressPath);
   }
 
   entries() {
-    return this.hasMany(`${ttevent}/Entry`);
+    return this.hasMany(entryPath);
   }
 
   tables() {
-    return this.hasMany(`${ttevent}/Table`);
+    return this.hasMany(tablePath);
   }
 
   championships() {
-    return this.hasMany(`${championship}`);
+    return this.hasMany(championshipPath);
   }
 }
 

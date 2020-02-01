@@ -3,7 +3,7 @@
 /** @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
 const Model = use('Model');
 
-const { base } = use('App/Utils/ModelsPath');
+const { addressPath } = use('App/Utils/ModelsPath');
 const PersonFilter = use('App/ModelFilters/PersonFilter');
 
 class Person extends Model {
@@ -17,7 +17,7 @@ class Person extends Model {
   }
 
   address() {
-    return this.belongsTo(`${base}/Address`);
+    return this.belongsTo(addressPath);
   }
 }
 

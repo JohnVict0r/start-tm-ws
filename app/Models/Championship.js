@@ -2,7 +2,9 @@
 
 /** @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
 const Model = use('Model');
-const { championship } = use('App/Utils/ModelsPath');
+const { confrontPath, athleteInscriptionPath, groupPath } = use(
+  'App/Utils/ModelsPath'
+);
 const ChampionshipFilter = use('App/ModelFilters/ChampionshipFilter');
 
 class Championship extends Model {
@@ -24,15 +26,15 @@ class Championship extends Model {
   }
 
   athleteInscriptions() {
-    return this.hasMany(`${championship}/AthleteInscription`);
+    return this.hasMany(athleteInscriptionPath);
   }
 
   confronts() {
-    return this.hasMany(`${championship}/Confront`);
+    return this.hasMany(confrontPath);
   }
 
   groups() {
-    return this.hasMany(`${championship}/Group`);
+    return this.hasMany(groupPath);
   }
 }
 
