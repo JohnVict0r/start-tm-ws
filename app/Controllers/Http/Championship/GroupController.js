@@ -13,26 +13,17 @@ const CreateGroupAthleteMatrixService = use(
  * Resourceful controller for interacting with groups
  */
 class GroupController {
-  /**
-   * Show a list of all groups.
-   * GET groups
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   * @param {View} ctx.view
-   */
-  async index({ request, response, view }) {}
+  async index({ params }) {
+    const groups = await Group.query()
+      .where({
+        championship_id: params.championships_id
+      })
+      .fetch();
 
-  /**
-   * Create/save a new group.
-   * POST groups
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   */
-  async store({ request, response, params }) {
+    return groups;
+  }
+
+  async store({ params }) {
     const { championships_id } = params;
 
     const groupsMatrix = await CreateGroupAthleteMatrixService.run({
@@ -57,25 +48,15 @@ class GroupController {
     return groups;
   }
 
-  /**
-   * Display a single group.
-   * GET groups/:id
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   */
-  async show({ params, request, response }) {}
+  async show({ params }) {
+    return Group.query()
+      .where({ id: params.id })
+      .with('championship')
+      .with('athletes')
+      .fetch();
+  }
 
-  /**
-   * Update group details.
-   * PUT or PATCH groups/:id
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   */
-  async update({ params, request, response }) {}
+  async update() {}
 }
 
 module.exports = GroupController;

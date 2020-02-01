@@ -13,10 +13,6 @@ class Group extends Model {
     return this.belongsTo(`${championship}`);
   }
 
-  athletesInscriptions() {
-    return this.hasMany(`${championship}/AthleteInscription`);
-  }
-
   athletes() {
     return this.belongsToMany('App/Models/Athlete').pivotTable(
       'groups_athletes'
