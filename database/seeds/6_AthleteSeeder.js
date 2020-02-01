@@ -19,8 +19,8 @@ class AthleteSeeder {
   async run() {
     const clubs_id = await Club.ids();
 
-    const people = await Factory.model(`${base}/Person`).createMany(12);
-    const athletes = await Factory.model(`${base}/Athlete`).makeMany(12, {
+    const people = await Factory.model(`${base}/Person`).createMany(14);
+    const athletes = await Factory.model(`${base}/Athlete`).makeMany(14, {
       clubs_id
     });
 
