@@ -5,6 +5,10 @@ const Model = use('Model');
 const { championship } = use('App/Utils/ModelsPath');
 
 class Group extends Model {
+  static columns() {
+    return ['letter', 'championship_id'];
+  }
+
   championship() {
     return this.belongsTo(`${championship}`);
   }
@@ -14,9 +18,9 @@ class Group extends Model {
   }
 
   athletes() {
-    return this
-      .belongsToMany('App/Models/Athlete')
-      .pivotTable('groups_athletes');
+    return this.belongsToMany('App/Models/Athlete').pivotTable(
+      'groups_athletes'
+    );
   }
 }
 

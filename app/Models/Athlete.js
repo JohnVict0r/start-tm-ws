@@ -16,7 +16,7 @@ class Athlete extends Model {
     return ['rating', 'club_id', 'person_id'];
   }
 
-  championshipInscriptions() {
+  athleteInscriptions() {
     return this.hasMany(`${championship}/AthleteInscription`);
   }
 
