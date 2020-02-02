@@ -25,7 +25,7 @@ class ConfrontSchema extends Schema {
         .unsigned()
         .references('athletes.id')
         .onUpdate('cascade');
-      table.string('arbiter').notNullable();
+      table.string('arbiter_name').notNullable();
       table
         .boolean('finalized')
         .notNullable()

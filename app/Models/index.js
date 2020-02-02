@@ -1,30 +1,45 @@
 'use strict';
 
-const { base, ttevent, championship } = use('App/Utils/ModelsPath');
+const {
+  subscriptionPath,
+  userPath,
+  personPath,
+  addressPath,
+  clubPath,
+  federationPath,
+  athletePath,
+  tteventPath,
+  entryPath,
+  tablePath,
+  championshipPath,
+  confrontPath,
+  athleteInscriptionPath,
+  groupPath
+} = use('App/Utils/ModelsPath');
 
-const Subscription = use(`${base}/Auth/Subscription`);
-const User = use(`${base}/User`);
-const Person = use(`${base}/Person`);
-const Address = use(`${base}/Address`);
-const Club = use(`${base}/Club`);
-const Federation = use(`${base}/Federation`);
-const Athlete = use(`${base}/Athlete`);
+const Subscription = use(subscriptionPath);
+const User = use(userPath);
+const Person = use(personPath);
+const Address = use(addressPath);
+const Club = use(clubPath);
+const Federation = use(federationPath);
+const Athlete = use(athletePath);
 
 /**
  * Event
  */
 
-const TTEvent = use(`${ttevent}`);
-const Entry = use(`${ttevent}/Entry`);
-const Table = use(`${ttevent}/Table`);
+const TTEvent = use(tteventPath);
+const Entry = use(entryPath);
+const Table = use(tablePath);
 
 /**
  * Championship
  */
-const Championship = use(`${championship}`);
-const Confront = use(`${championship}/Confront`);
-const AthleteInscription = use(`${championship}/AthleteInscription`);
-const Group = use(`${championship}/Group`);
+const Championship = use(championshipPath);
+const Confront = use(confrontPath);
+const AthleteInscription = use(athleteInscriptionPath);
+const Group = use(groupPath);
 
 module.exports = {
   User,

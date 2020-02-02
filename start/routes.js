@@ -2,7 +2,6 @@
 
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route');
-const { auth } = use('App/Utils/ControllersPath');
 const roles = require('../database/data/role').slugs;
 
 Route.get('/', async () => 'Hello World');
@@ -14,7 +13,7 @@ require('./routes/auth_rotes');
 require('./routes/ttevent_routes');
 
 // Subscriptions
-Route.post('/subscriptions', `${auth}/SubscriptionController.store`);
+Route.post('/subscriptions', 'Auth/SubscriptionController.store');
 // .validator(
 //   `${auth}/Subscription/Store`
 // );

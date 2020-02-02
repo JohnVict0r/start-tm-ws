@@ -6,6 +6,7 @@ class AthleteController {
     const { page, ...data } = request.all();
     return Athlete.query()
       .filter(data)
+      .with('person')
       .paginate(page || 1, 10);
   }
 

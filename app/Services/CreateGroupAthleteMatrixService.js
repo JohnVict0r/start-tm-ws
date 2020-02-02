@@ -1,4 +1,4 @@
-const { Group, Championship, Athlete } = use('App/Models');
+const { Championship, Athlete } = use('App/Models');
 
 class CreateGroupAthleteMatrixService {
   async run({ championships_id }) {
@@ -15,7 +15,7 @@ class CreateGroupAthleteMatrixService {
       .orderBy('rating', 'asc')
       .fetch();
     // Athletes in Asc Order
-    const athletes = athletesQuery.toJSON().map((athl) => athl.id);
+    const athletes = athletesQuery.toJSON();
 
     const ATHLETE_PER_GROUP = 3;
     const groupAmount = Math.trunc(athletes.length / ATHLETE_PER_GROUP);
@@ -31,11 +31,15 @@ class CreateGroupAthleteMatrixService {
       extraGroup.push(athletes.pop());
     }
 
-    // First distribution is in desc order
+    // First distribution is in desc order, the wrench heads
     for (let i = 0; i < groupAmount; i += 1)
       groupMatrix[i].push(athletes.pop());
 
     // The others are in ascending order
+
+    // Regardless if there is an athlete left, the last one will always go to the last group
+    const lastAthlete = athletes.shift();
+
     athletes.map((ath) => {
       groupMatrix[y].push(ath);
 
@@ -43,6 +47,8 @@ class CreateGroupAthleteMatrixService {
       if (y >= groupAmount) y = 0;
       return ath;
     });
+
+    groupMatrix[groupAmount - 1].push(lastAthlete);
 
     if (extraGroup.length !== 0) groupMatrix.unshift(extraGroup);
 
