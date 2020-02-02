@@ -9,13 +9,17 @@ class CreateGroupAthleteMatrixService {
       .select('athlete_id')
       .where({ approved: true })
       .fetch();
-    const athletes_id = Array.from(res.toJSON(), (i) => i.athlete_id);
+    const athletesForQueryIds = Array.from(res.toJSON(), (i) => i.athlete_id);
     const athletesQuery = await Athlete.query()
-      .whereIn('id', athletes_id)
+      .whereIn('id', athletesForQueryIds)
       .orderBy('rating', 'asc')
       .fetch();
     // Athletes in Asc Order
-    const athletes = athletesQuery.toJSON();
+    const athletesQueryJson = athletesQuery.toJSON();
+
+    // Create athlete ids with rating in Asc Order
+    const athletes = [];
+    athletesQueryJson.map((athlete) => athletes.push(athlete.id));
 
     const ATHLETE_PER_GROUP = 3;
     const groupAmount = Math.trunc(athletes.length / ATHLETE_PER_GROUP);
@@ -40,8 +44,8 @@ class CreateGroupAthleteMatrixService {
     // Regardless if there is an athlete left, the last one will always go to the last group
     const lastAthlete = athletes.shift();
 
-    athletes.map((ath) => {
-      groupMatrix[y].push(ath);
+    athletes.map((athlete) => {
+      groupMatrix[y].push(athlete);
 
       y += 1;
       if (y >= groupAmount) y = 0;

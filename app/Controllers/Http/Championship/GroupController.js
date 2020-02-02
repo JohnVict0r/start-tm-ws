@@ -18,6 +18,7 @@ class GroupController {
       .where({
         championship_id: params.championships_id
       })
+      .with('athletes')
       .fetch();
 
     return groups;
