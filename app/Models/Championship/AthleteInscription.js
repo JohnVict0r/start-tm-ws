@@ -3,7 +3,7 @@
 /** @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
 const Model = use('Model');
 
-const { base, championship } = use('App/Utils/ModelsPath');
+const { athletePath, championshipPath } = use('App/Utils/ModelsPath');
 
 class AthleteInscription extends Model {
   static boot() {
@@ -15,11 +15,11 @@ class AthleteInscription extends Model {
   }
 
   athlete() {
-    return this.belongsTo(`${base}/Athlete`);
+    return this.belongsTo(athletePath);
   }
 
   championship() {
-    return this.belongsTo(`${championship}`);
+    return this.belongsTo(championshipPath);
   }
 }
 

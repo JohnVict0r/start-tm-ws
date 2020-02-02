@@ -2,7 +2,6 @@
 
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route');
-const { ttevent, championship } = use('App/Utils/ControllersPath');
 const roles = require('../../database/data/role').slugs;
 
 /**
@@ -21,7 +20,7 @@ Route.resource('ttevents', 'TTEventController').apiOnly();
 
 Route.group(() => {
   // Table
-  Route.resource('tables', `${ttevent}/TableController`).apiOnly();
+  Route.resource('tables', 'TTEvent/TableController').apiOnly();
 }).prefix('ttevents/:tt_events_id/');
 // .middleware(
 //   new Map([
@@ -46,16 +45,16 @@ Route.resource('championships', 'ChampionshipController').apiOnly();
 
 Route.group(() => {
   // Confront
-  Route.resource('confronts', `${championship}/ConfrontController`).apiOnly();
+  Route.resource('confronts', 'Championship/ConfrontController').apiOnly();
 
   // Athlete Inscription
   Route.resource(
     'athlete-inscriptions',
-    `${championship}/AthleteInscriptionController`
+    'Championship/AthleteInscriptionController'
   ).apiOnly();
 
   // Group
-  Route.resource('groups', `${championship}/GroupController`).apiOnly();
+  Route.resource('groups', 'Championship/GroupController').apiOnly();
 }).prefix('championships/:championships_id/');
 // .middleware(
 //   new Map([

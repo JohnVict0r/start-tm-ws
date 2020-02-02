@@ -13,13 +13,13 @@
 /** @type {import('@adonisjs/lucid/src/Factory')} */
 const Factory = use('Factory');
 const { Federation } = use('App/Models');
-const { base } = use('App/Utils/ModelsPath');
+const { addressPath, clubPath } = use('App/Utils/ModelsPath');
 
 class ClubSeeder {
   async run() {
     const federations_id = await Federation.ids();
-    const addresses = await Factory.model(`${base}/Address`).createMany(5);
-    const clubs = await Factory.model(`${base}/Club`).makeMany(5, {
+    const addresses = await Factory.model(addressPath).createMany(5);
+    const clubs = await Factory.model(clubPath).makeMany(5, {
       federations_id
     });
 

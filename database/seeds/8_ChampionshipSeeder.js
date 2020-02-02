@@ -12,13 +12,13 @@
 
 /** @type {import('@adonisjs/lucid/src/Factory')} */
 const Factory = use('Factory');
-const { base } = use('App/Utils/ModelsPath');
-const { Athlete, Championship, Federation, TTEvent } = use('App/Models');
+const { championshipPath } = use('App/Utils/ModelsPath');
+const { TTEvent } = use('App/Models');
 
 class ChampionshipSeeder {
   async run() {
     const ttevents_id = await TTEvent.ids();
-    const championship = await Factory.model(`${base}/Championship`).create({
+    const championship = await Factory.model(championshipPath).create({
       tt_event_id: ttevents_id[0]
     });
   }

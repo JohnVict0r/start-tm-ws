@@ -17,6 +17,11 @@ class GroupsAthletesSchema extends Schema {
         .notNullable()
         .unsigned()
         .references('groups.id');
+      table
+        .integer('classification')
+        .notNullable()
+        .unsigned()
+        .defaultTo(0);
       table.timestamps();
     });
   }

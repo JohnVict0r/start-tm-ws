@@ -3,7 +3,10 @@
 /** @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
 const Model = use('Model');
 
-const { base, championship } = use('App/Utils/ModelsPath');
+const { personPath, athleteInscriptionPath, clubPath } = use(
+  'App/Utils/ModelsPath'
+);
+
 const AthleteFilter = use('App/ModelFilters/AthleteFilter');
 
 class Athlete extends Model {
@@ -17,15 +20,15 @@ class Athlete extends Model {
   }
 
   athleteInscriptions() {
-    return this.hasMany(`${championship}/AthleteInscription`);
+    return this.hasMany(athleteInscriptionPath);
   }
 
   person() {
-    return this.belongsTo(`${base}/Person`);
+    return this.belongsTo(personPath);
   }
 
   club() {
-    return this.belongsTo(`${base}/Club`);
+    return this.belongsTo(clubPath);
   }
 }
 

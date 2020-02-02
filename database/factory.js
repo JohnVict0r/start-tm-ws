@@ -4,12 +4,12 @@
 const Factory = use('Factory');
 const Hash = use('Hash');
 
-const { base } = use('App/Utils/ModelsPath');
+const paths = use('App/Utils/ModelsPath');
 const address = require('../database/data/address');
 const tteventData = require('../database/data/ttevent');
 const { addDays } = require('../app/Utils/DateUtils');
 
-Factory.blueprint(`${base}/User`, async (faker, i, data) => ({
+Factory.blueprint(paths.userPath, async (faker, i, data) => ({
   email: data.email ? data.email : faker.email({ domain: 'example.com' }),
   password: await Hash.make('psw12345')
 }));
@@ -26,12 +26,12 @@ Factory.blueprint('Adonis/Acl/Permission', async (faker, i, data) => ({
   description: 'Auto Generated Permission'
 }));
 
-Factory.blueprint(`${base}/Athlete`, async (faker, i, data) => ({
+Factory.blueprint(paths.athletePath, async (faker, i, data) => ({
   rating: faker.integer({ min: 0, max: 4000 }),
   club_id: faker.pickone(data.clubs_id)
 }));
 
-Factory.blueprint(`${base}/Person`, async (faker) => ({
+Factory.blueprint(paths.personPath, async (faker) => ({
   name: faker.name(),
   sex: faker.gender().toUpperCase(),
   birth: faker.date({
@@ -41,18 +41,18 @@ Factory.blueprint(`${base}/Person`, async (faker) => ({
   cpf: faker.cpf()
 }));
 
-Factory.blueprint(`${base}/Club`, async (faker, i, data) => ({
+Factory.blueprint(paths.clubPath, async (faker, i, data) => ({
   name: faker.name(),
   federation_id: faker.pickone(data.federations_id)
 }));
 
-Factory.blueprint(`${base}/Federation`, async (faker) => ({
+Factory.blueprint(paths.federationPath, async (faker) => ({
   uf: faker.pickone(address.ufs),
   name: faker.company(),
   initials: faker.name()
 }));
 
-Factory.blueprint(`${base}/Address`, async (faker) => ({
+Factory.blueprint(paths.addressPath, async (faker) => ({
   street: faker.street(),
   number: faker.integer({ min: 0, max: 9999 }),
   neighborhood: faker.province({ full: true }),
@@ -62,15 +62,12 @@ Factory.blueprint(`${base}/Address`, async (faker) => ({
   uf: faker.pickone(address.ufs)
 }));
 
-Factory.blueprint(
-  `${base}/Championship/AthleteInscription`,
-  async (faker, i, data) => ({
-    championship_id: faker.pickone(data.championships_id),
-    approved: true
-  })
-);
+Factory.blueprint(paths.athleteInscriptionPath, async (faker, i, data) => ({
+  championship_id: faker.pickone(data.championships_id),
+  approved: true
+}));
 
-Factory.blueprint(`${base}/TTEvent`, async (faker, i, data) => {
+Factory.blueprint(paths.tteventPath, async (faker, i, data) => {
   const startInscription = faker
     .date({ year: new Date().getFullYear() })
     .toDateString();
@@ -96,7 +93,7 @@ Factory.blueprint(`${base}/TTEvent`, async (faker, i, data) => {
   };
 });
 
-Factory.blueprint(`${base}/Championship`, async (faker, i, data) => {
+Factory.blueprint(paths.championshipPath, async (faker, i, data) => {
   let upperLimit = faker.integer({ min: 0, max: 3499 });
   let downLimit = faker.integer({ min: upperLimit, max: 3500 });
   const sex = faker.pickone(['M', 'F', 'X']);
