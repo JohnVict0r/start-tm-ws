@@ -3,7 +3,7 @@
 /** @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
 const Model = use('Model');
 
-const { base } = use('App/Utils/ModelsPath');
+const { addressPath, federationPath } = use('App/Utils/ModelsPath');
 
 const ClubFilter = use('App/ModelFilters/ClubFilter');
 
@@ -18,11 +18,11 @@ class Club extends Model {
   }
 
   federation() {
-    return this.belongsTo(`${base}/Federation`);
+    return this.belongsTo(federationPath);
   }
 
   address() {
-    return this.belongsTo(`${base}/Address`);
+    return this.belongsTo(addressPath);
   }
 }
 
