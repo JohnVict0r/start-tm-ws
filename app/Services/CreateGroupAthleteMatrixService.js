@@ -15,7 +15,7 @@ class CreateGroupAthleteMatrixService {
       .orderBy('rating', 'asc')
       .fetch();
     // Athletes in Asc Order
-    const athletes = athletesQuery.toJSON().map((athl) => athl.id);
+    const athletes = athletesQuery.toJSON();
 
     const ATHLETE_PER_GROUP = 3;
     const groupAmount = Math.trunc(athletes.length / ATHLETE_PER_GROUP);
@@ -30,6 +30,8 @@ class CreateGroupAthleteMatrixService {
       extraGroup.push(athletes.pop());
       extraGroup.push(athletes.pop());
     }
+
+    // The distribuitions are made vertically!
 
     // First distribution is in desc order, the wrench heads
     for (let i = 0; i < groupAmount; i += 1)
@@ -48,11 +50,18 @@ class CreateGroupAthleteMatrixService {
       return ath;
     });
 
+    // The last athlete
     groupMatrix[groupAmount - 1].push(lastAthlete);
 
+    // The strongest athletes
     if (extraGroup.length !== 0) groupMatrix.unshift(extraGroup);
 
-    return groupMatrix;
+    // The final step is order desc horizontally the matrix and get only ids
+    const ordenedGroupMatrix = groupMatrix.map((array) =>
+      array.sort((a, b) => b.rating - a.rating).map((athl) => athl.id)
+    );
+
+    return ordenedGroupMatrix;
   }
 }
 
