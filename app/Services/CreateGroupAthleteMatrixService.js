@@ -15,7 +15,7 @@ class CreateGroupAthleteMatrixService {
       .orderBy('rating', 'asc')
       .fetch();
     // Athletes in Asc Order
-    const athletes = athletesQuery.toJSON();
+    const athletes = athletesQuery.toJSON().map((athl) => athl.id);
 
     const ATHLETE_PER_GROUP = 3;
     const groupAmount = Math.trunc(athletes.length / ATHLETE_PER_GROUP);

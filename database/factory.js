@@ -110,7 +110,6 @@ Factory.blueprint(paths.championshipPath, async (faker, i, data) => {
     sex,
     type,
     upperLimit,
-    downLimit,
-    active: false
+    downLimit
   };
 });
