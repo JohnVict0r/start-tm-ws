@@ -113,3 +113,8 @@ Factory.blueprint(paths.championshipPath, async (faker, i, data) => {
     downLimit
   };
 });
+
+Factory.blueprint(paths.tablePath, async (faker, i, data) => ({
+  number: i,
+  tt_event_id: data.tt_event_id
+}));
