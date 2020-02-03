@@ -55,8 +55,6 @@ class GroupController {
       .with('athletes')
       .fetch();
   }
-
-  async update() {}
 }
 
 module.exports = GroupController;

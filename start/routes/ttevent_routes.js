@@ -64,3 +64,8 @@ Route.group(() => {
 //     ]
 //   ])
 // );
+
+// Group Athlete
+Route.resource('group_athletes', 'Championship/GroupAthleteController').only([
+  'update'
+]);

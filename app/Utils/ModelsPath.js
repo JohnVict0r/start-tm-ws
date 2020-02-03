@@ -17,6 +17,7 @@ const confrontPath = `${championshipPath}/Confront`;
 const groupPath = `${championshipPath}/Group`;
 const setPath = `${championshipPath}/Set`;
 const subscriptionPath = `${basePath}/Auth/Subscription`;
+const groupAthletePath = `${championshipPath}/GroupAthlete`;
 
 module.exports = {
   basePath,
@@ -35,5 +36,6 @@ module.exports = {
   confrontPath,
   groupPath,
   setPath,
-  subscriptionPath
+  subscriptionPath,
+  groupAthletePath
 };
