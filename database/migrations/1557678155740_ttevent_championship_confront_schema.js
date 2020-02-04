@@ -31,13 +31,12 @@ class ConfrontSchema extends Schema {
         .notNullable()
         .defaultTo(false);
       table.enu('phase', confront.phases).defaultTo(confront.phases[0]);
+      table.integer('group_id').references('groups.id');
       table
         .integer('table_id')
         .notNullable()
         .unsigned()
-        .references('tables.id')
-        .onUpdate('cascade')
-        .onDelete('cascade');
+        .references('tables.id');
       table
         .integer('championship_id')
         .notNullable()

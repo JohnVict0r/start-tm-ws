@@ -1,6 +1,9 @@
 'use strict';
 
 const { Confront } = use('App/Models');
+const CreateClassificatoryConfrontsService = use(
+  'App/Services/CreateClassificatoryConfrontsService'
+);
 
 class ConfrontController {
   async index() {
@@ -10,14 +13,13 @@ class ConfrontController {
   }
 
   async store({ request, params }) {
-    const { championships_id } = params;
+    const { championships_id: championship_id } = params;
 
-    const data = request.only(Confront.columns());
-    data.championship_id = championships_id;
+    const result = await CreateClassificatoryConfrontsService.run({
+      championship_id
+    });
 
-    const confront = await Confront.create(data);
-
-    return confront;
+    return result;
   }
 
   async show({ params }) {

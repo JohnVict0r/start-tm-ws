@@ -27,7 +27,7 @@ Factory.blueprint('Adonis/Acl/Permission', async (faker, i, data) => ({
 }));
 
 Factory.blueprint(paths.athletePath, async (faker, i, data) => ({
-  rating: faker.integer({ min: 0, max: 4000 }),
+  rating: (i + 1) * 100,
   club_id: faker.pickone(data.clubs_id)
 }));
 
