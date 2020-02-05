@@ -6,18 +6,24 @@ const CreateClassificatoryConfrontsService = use(
 );
 
 class ConfrontController {
-  async index() {
-    const confronts = await Confront.all();
+  async index({ params }) {
+    const confronts = await Confront.query()
+      .where({
+        championship_id: params.championships_id
+      })
+      .fetch();
 
     return confronts;
   }
 
-  async store({ request, params }) {
+  async store({ params }) {
     const { championships_id: championship_id } = params;
 
-    const result = await CreateClassificatoryConfrontsService.run({
+    const confronts = await CreateClassificatoryConfrontsService.run({
       championship_id
     });
+
+    const result = await Confront.createMany(confronts);
 
     return result;
   }
@@ -28,19 +34,6 @@ class ConfrontController {
     const confront = await Confront.findOrFail(id);
 
     await confront.loadMany(['playerOne', 'playerTwo', 'table']);
-
-    return confront;
-  }
-
-  async update({ params, request }) {
-    const { id } = params;
-    const { championship_id, ...data } = request.only(Confront.columns());
-
-    const confront = await Confront.findOrFail(id);
-
-    confront.merge(data);
-
-    await confront.save();
 
     return confront;
   }

@@ -25,18 +25,16 @@ class ConfrontSchema extends Schema {
         .unsigned()
         .references('athletes.id')
         .onUpdate('cascade');
-      table.string('arbiter_name').notNullable();
+      table.string('arbiter_name');
       table
         .boolean('finalized')
         .notNullable()
         .defaultTo(false);
-      table.enu('phase', confront.phases).defaultTo(confront.phases[0]);
-      table.integer('group_id').references('groups.id');
       table
-        .integer('table_id')
-        .notNullable()
-        .unsigned()
-        .references('tables.id');
+        .enu('phase', ['classificatory', 'eliminatory'])
+        .defaultTo('classificatory');
+      table.integer('group_id').references('groups.id');
+      table.integer('table_id').references('tables.id');
       table
         .integer('championship_id')
         .notNullable()
