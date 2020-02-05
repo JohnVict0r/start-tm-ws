@@ -65,7 +65,12 @@ Route.group(() => {
 //   ])
 // );
 
-// Group Athlete
-Route.resource('group_athletes', 'Championship/GroupAthleteController').only([
-  'update'
-]);
+// Confront
+Route.put(
+  'start_confronts/:confront_id',
+  'Championship/StartConfrontController.update'
+);
+Route.put(
+  'end_confronts/:confront_id',
+  'Championship/EndConfrontController.update'
+);

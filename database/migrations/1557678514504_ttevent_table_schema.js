@@ -1,13 +1,11 @@
 /** @type {import('@adonisjs/lucid/src/Schema')} */
 const Schema = use('Schema');
 
-const tables = require('../data/table');
-
 class TableSchema extends Schema {
   up() {
     this.create('tables', (table) => {
       table.increments();
-      table.enu('status', tables.status).defaultTo(tables.status[0]);
+      table.enu('status', ['FREE', 'BUSY', 'BROKEN']).defaultTo('FREE');
       table
         .integer('number')
         .notNullable()
