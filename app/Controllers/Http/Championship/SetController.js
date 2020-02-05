@@ -1,93 +1,40 @@
-'use strict'
+'use strict';
 
-/** @typedef {import('@adonisjs/framework/src/Request')} Request */
-/** @typedef {import('@adonisjs/framework/src/Response')} Response */
-/** @typedef {import('@adonisjs/framework/src/View')} View */
-
-/**
- * Resourceful controller for interacting with sets
- */
+const { Set } = use('App/Models');
 class SetController {
-  /**
-   * Show a list of all sets.
-   * GET sets
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   * @param {View} ctx.view
-   */
-  async index ({ request, response, view }) {
+  async index({ params }) {
+    return Set.query()
+      .where({ confront_id: params.confronts_id })
+      .fetch();
   }
 
-  /**
-   * Render a form to be used for creating a new set.
-   * GET sets/create
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   * @param {View} ctx.view
-   */
-  async create ({ request, response, view }) {
+  async store({ request, params }) {
+    const data = request.only(Set.columns());
+    data.confront_id = params.confronts_id;
+
+    return Set.create(data);
   }
 
-  /**
-   * Create/save a new set.
-   * POST sets
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   */
-  async store ({ request, response }) {
+  async show({ params }) {
+    return Set.findOrFail(params.id);
   }
 
-  /**
-   * Display a single set.
-   * GET sets/:id
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   * @param {View} ctx.view
-   */
-  async show ({ params, request, response, view }) {
+  async update({ params, request }) {
+    const set = await Set.findOrFail(params.id);
+    const { confront_id, order, ...data } = request.only(Set.columns());
+
+    set.merge(data);
+
+    await set.save();
+
+    return set;
   }
 
-  /**
-   * Render a form to update an existing set.
-   * GET sets/:id/edit
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   * @param {View} ctx.view
-   */
-  async edit ({ params, request, response, view }) {
-  }
-
-  /**
-   * Update set details.
-   * PUT or PATCH sets/:id
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   */
-  async update ({ params, request, response }) {
-  }
-
-  /**
-   * Delete a set with id.
-   * DELETE sets/:id
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   */
-  async destroy ({ params, request, response }) {
+  async destroy({ params }) {
+    const set = await Set.findOrFail(params.id);
+    await set.delete();
+    return set;
   }
 }
 
-module.exports = SetController
+module.exports = SetController;
