@@ -14,7 +14,8 @@ const {
   championshipPath,
   confrontPath,
   athleteInscriptionPath,
-  groupPath
+  groupPath,
+  groupAthletePath
 } = use('App/Utils/ModelsPath');
 
 const Subscription = use(subscriptionPath);
@@ -40,6 +41,7 @@ const Championship = use(championshipPath);
 const Confront = use(confrontPath);
 const AthleteInscription = use(athleteInscriptionPath);
 const Group = use(groupPath);
+const GroupAthlete = use(groupAthletePath);
 
 module.exports = {
   User,
@@ -58,5 +60,6 @@ module.exports = {
   Championship,
   AthleteInscription,
   Confront,
-  Group
+  Group,
+  GroupAthlete
 };

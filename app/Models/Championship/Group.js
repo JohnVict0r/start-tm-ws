@@ -2,7 +2,9 @@
 
 /** @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
 const Model = use('Model');
-const { championshipPath, athletePath } = use('App/Utils/ModelsPath');
+const { championshipPath, athletePath, groupAthletePath, confrontPath } = use(
+  'App/Utils/ModelsPath'
+);
 
 class Group extends Model {
   static columns() {
@@ -14,7 +16,11 @@ class Group extends Model {
   }
 
   athletes() {
-    return this.belongsToMany(athletePath).pivotTable('groups_athletes');
+    return this.belongsToMany(athletePath).pivotModel(groupAthletePath);
+  }
+
+  confronts() {
+    return this.hasMany(confrontPath);
   }
 }
 

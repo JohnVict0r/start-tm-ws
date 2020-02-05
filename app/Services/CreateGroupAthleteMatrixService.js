@@ -1,3 +1,5 @@
+'use strict';
+
 const { Championship, Athlete } = use('App/Models');
 
 class CreateGroupAthleteMatrixService {

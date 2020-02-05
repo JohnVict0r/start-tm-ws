@@ -13,11 +13,12 @@ class Confront extends Model {
       'number',
       'player_one',
       'player_two',
-      'arbiter',
+      'arbiter_name',
       'phase',
       'table_id',
       'finalized',
-      'championship_id'
+      'championship_id',
+      'group_id'
     ];
   }
 

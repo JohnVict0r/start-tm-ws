@@ -53,10 +53,9 @@ class GroupController {
       .where({ id: params.id })
       .with('championship')
       .with('athletes')
+      .with('confronts')
       .fetch();
   }
-
-  async update() {}
 }
 
 module.exports = GroupController;

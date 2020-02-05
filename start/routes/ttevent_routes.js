@@ -64,3 +64,13 @@ Route.group(() => {
 //     ]
 //   ])
 // );
+
+// Confront
+Route.put(
+  'start_confronts/:confront_id',
+  'Championship/StartConfrontController.update'
+);
+Route.put(
+  'end_confronts/:confront_id',
+  'Championship/EndConfrontController.update'
+);
