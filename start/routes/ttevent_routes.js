@@ -44,9 +44,6 @@ Route.resource('championships', 'ChampionshipController').apiOnly();
 // );
 
 Route.group(() => {
-  // Confront
-  Route.resource('confronts', 'Championship/ConfrontController').apiOnly();
-
   // Athlete Inscription
   Route.resource(
     'athlete-inscriptions',
@@ -55,6 +52,15 @@ Route.group(() => {
 
   // Group
   Route.resource('groups', 'Championship/GroupController').apiOnly();
+
+  // Confront
+  Route.resource('confronts', 'Championship/ConfrontController').apiOnly();
+
+  // Set
+  Route.resource(
+    'confronts/:confronts_id/sets',
+    'Championship/SetController'
+  ).apiOnly();
 }).prefix('championships/:championships_id/');
 // .middleware(
 //   new Map([

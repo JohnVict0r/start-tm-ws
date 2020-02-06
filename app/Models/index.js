@@ -1,47 +1,32 @@
 'use strict';
 
-const {
-  subscriptionPath,
-  userPath,
-  personPath,
-  addressPath,
-  clubPath,
-  federationPath,
-  athletePath,
-  tteventPath,
-  entryPath,
-  tablePath,
-  championshipPath,
-  confrontPath,
-  athleteInscriptionPath,
-  groupPath,
-  groupAthletePath
-} = use('App/Utils/ModelsPath');
+const paths = use('App/Utils/ModelsPath');
 
-const Subscription = use(subscriptionPath);
-const User = use(userPath);
-const Person = use(personPath);
-const Address = use(addressPath);
-const Club = use(clubPath);
-const Federation = use(federationPath);
-const Athlete = use(athletePath);
+const Subscription = use(paths.subscriptionPath);
+const User = use(paths.userPath);
+const Person = use(paths.personPath);
+const Address = use(paths.addressPath);
+const Club = use(paths.clubPath);
+const Federation = use(paths.federationPath);
+const Athlete = use(paths.athletePath);
 
 /**
  * Event
  */
 
-const TTEvent = use(tteventPath);
-const Entry = use(entryPath);
-const Table = use(tablePath);
+const TTEvent = use(paths.tteventPath);
+const Entry = use(paths.entryPath);
+const Table = use(paths.tablePath);
 
 /**
  * Championship
  */
-const Championship = use(championshipPath);
-const Confront = use(confrontPath);
-const AthleteInscription = use(athleteInscriptionPath);
-const Group = use(groupPath);
-const GroupAthlete = use(groupAthletePath);
+const Championship = use(paths.championshipPath);
+const Confront = use(paths.confrontPath);
+const AthleteInscription = use(paths.athleteInscriptionPath);
+const Group = use(paths.groupPath);
+const GroupAthlete = use(paths.groupAthletePath);
+const Set = use(paths.setPath);
 
 module.exports = {
   User,
@@ -61,5 +46,6 @@ module.exports = {
   AthleteInscription,
   Confront,
   Group,
-  GroupAthlete
+  GroupAthlete,
+  Set
 };
