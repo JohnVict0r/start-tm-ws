@@ -12,7 +12,7 @@ class AthleteFilter extends ModelFilter {
     return this.whereBetween('rating', [value - 100, value + 100]);
   }
 
-  event(tt_event_id) {
+  inEvent(tt_event_id) {
     const champSubquery = Database.from('championships')
       .select('id')
       .where({ tt_event_id });
@@ -21,6 +21,17 @@ class AthleteFilter extends ModelFilter {
       .whereIn('championship_id', champSubquery);
 
     return this.whereIn('id', athlInsSubquery);
+  }
+
+  notInEvent(tt_event_id) {
+    const champSubquery = Database.from('championships')
+      .select('id')
+      .where({ tt_event_id });
+    const athlInsSubquery = Database.from('athlete_inscriptions')
+      .select('athlete_id')
+      .whereIn('championship_id', champSubquery);
+
+    return this.whereNotIn('id', athlInsSubquery);
   }
 }
 
