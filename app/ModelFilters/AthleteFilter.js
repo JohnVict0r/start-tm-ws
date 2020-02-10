@@ -22,6 +22,17 @@ class AthleteFilter extends ModelFilter {
 
     return this.whereIn('id', athlInsSubquery);
   }
+
+  notInEvent(tt_event_id) {
+    const champSubquery = Database.from('championships')
+      .select('id')
+      .where({ tt_event_id });
+    const athlInsSubquery = Database.from('athlete_inscriptions')
+      .select('athlete_id')
+      .whereIn('championship_id', champSubquery);
+
+    return this.whereNotIn('id', athlInsSubquery);
+  }
 }
 
 module.exports = AthleteFilter;
