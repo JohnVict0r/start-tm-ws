@@ -1,12 +1,41 @@
 /** @type {import('@adonisjs/lucid/src/Schema')} */
 const Schema = use('Schema');
-const address = require('../data/address');
 
 class FederationSchema extends Schema {
   up() {
     this.create('federations', (table) => {
       table.increments();
-      table.enu('uf', address.ufs).notNullable();
+      table
+        .enu('uf', [
+          'RN',
+          'SP',
+          'AM',
+          'BA',
+          'PE',
+          'RO',
+          'RR',
+          'PR',
+          'AL',
+          'RJ',
+          'MG',
+          'MT',
+          'MS',
+          'AC',
+          'PI',
+          'SC',
+          'SE',
+          'TO',
+          'RS',
+          'PA',
+          'PB',
+          'MA',
+          'GO',
+          'ES',
+          'DF',
+          'CE',
+          'AP'
+        ])
+        .notNullable();
       table
         .string('name')
         .notNullable()

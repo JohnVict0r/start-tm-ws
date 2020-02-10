@@ -5,9 +5,37 @@ const Factory = use('Factory');
 const Hash = use('Hash');
 
 const paths = use('App/Utils/ModelsPath');
-const address = require('../database/data/address');
-const tteventData = require('../database/data/ttevent');
-const { addDays } = require('../app/Utils/DateUtils');
+const { addDays } = use('App/Utils/DateUtil');
+
+const ufs = [
+  'RN',
+  'SP',
+  'AM',
+  'BA',
+  'PE',
+  'RO',
+  'RR',
+  'PR',
+  'AL',
+  'RJ',
+  'MG',
+  'MT',
+  'MS',
+  'AC',
+  'PI',
+  'SC',
+  'SE',
+  'TO',
+  'RS',
+  'PA',
+  'PB',
+  'MA',
+  'GO',
+  'ES',
+  'DF',
+  'CE',
+  'AP'
+];
 
 Factory.blueprint(paths.userPath, async (faker, i, data) => ({
   email: data.email ? data.email : faker.email({ domain: 'example.com' }),
@@ -47,7 +75,7 @@ Factory.blueprint(paths.clubPath, async (faker, i, data) => ({
 }));
 
 Factory.blueprint(paths.federationPath, async (faker) => ({
-  uf: faker.pickone(address.ufs),
+  uf: faker.pickone(ufs),
   name: faker.company(),
   initials: faker.name()
 }));
@@ -59,7 +87,7 @@ Factory.blueprint(paths.addressPath, async (faker) => ({
   cep: faker.zip(),
   complement: '',
   city: faker.city(),
-  uf: faker.pickone(address.ufs)
+  uf: faker.pickone(ufs)
 }));
 
 Factory.blueprint(paths.athleteInscriptionPath, async (faker, i, data) => ({
@@ -82,7 +110,7 @@ Factory.blueprint(paths.tteventPath, async (faker, i, data) => {
   const end = addDays(start, faker.integer({ min: 1, max: 5 })).toDateString();
 
   return {
-    type: faker.pickone(tteventData.types),
+    type: faker.pickone(['school', 'state', 'intrastate', 'national', 'club']),
     name: `Evento ${faker.company()}`,
     startInscription,
     endInscription,
@@ -115,6 +143,26 @@ Factory.blueprint(paths.championshipPath, async (faker, i, data) => {
 });
 
 Factory.blueprint(paths.tablePath, async (faker, i, data) => ({
-  number: i,
+  number: i + 1,
   tt_event_id: data.tt_event_id
+}));
+
+Factory.blueprint(paths.setPath, async (faker, i, data) => {
+  const athlete_one_score = faker.integer({ min: 7, max: 15 });
+  const athlete_two_score = faker.bool()
+    ? athlete_one_score + 2
+    : athlete_one_score - 2;
+
+  return {
+    order: i + 1,
+    confront_id: data.confront_id,
+    athlete_one_score,
+    athlete_two_score
+  };
+});
+
+Factory.blueprint(paths.confrontPath, async (faker, i, data) => ({
+  ...data,
+  finalized: true,
+  arbiter_name: faker.name()
 }));

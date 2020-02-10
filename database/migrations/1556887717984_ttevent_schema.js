@@ -1,12 +1,13 @@
 /** @type {import('@adonisjs/lucid/src/Schema')} */
 const Schema = use('Schema');
-const event = require('../data/ttevent');
 
 class TTEventSchema extends Schema {
   up() {
     this.create('ttevents', (table) => {
       table.increments();
-      table.enu('type', event.types).notNullable();
+      table
+        .enu('type', ['school', 'state', 'intrastate', 'national', 'club'])
+        .notNullable();
       table.string('name').notNullable();
       table.datetime('startInscription').notNullable();
       table.datetime('endInscription').notNullable();

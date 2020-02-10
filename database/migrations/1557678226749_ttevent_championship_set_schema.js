@@ -10,11 +10,11 @@ class SetSchema extends Schema {
         .notNullable()
         .unsigned();
       table
-        .integer('player_one_score')
+        .integer('athlete_one_score')
         .notNullable()
         .unsigned();
       table
-        .integer('player_two_score')
+        .integer('athlete_two_score')
         .notNullable()
         .unsigned();
       table

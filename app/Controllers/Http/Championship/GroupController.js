@@ -1,17 +1,10 @@
 'use strict';
 
-const { Group, Championship, Athlete } = use('App/Models');
+const { Group } = use('App/Models');
 const CreateGroupAthleteMatrixService = use(
   'App/Services/CreateGroupAthleteMatrixService'
 );
 
-/** @typedef {import('@adonisjs/framework/src/Request')} Request */
-/** @typedef {import('@adonisjs/framework/src/Response')} Response */
-/** @typedef {import('@adonisjs/framework/src/View')} View */
-
-/**
- * Resourceful controller for interacting with groups
- */
 class GroupController {
   async index({ params }) {
     const groups = await Group.query()
@@ -27,7 +20,7 @@ class GroupController {
     const { championships_id } = params;
 
     const groupsMatrix = await CreateGroupAthleteMatrixService.run({
-      championships_id
+      championship_id: championships_id
     });
 
     const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');

@@ -5,7 +5,7 @@ const Model = use('Model');
 
 class Set extends Model {
   static columns() {
-    return ['player_one_score', 'player_two_score', 'order', 'confront_id'];
+    return ['athlete_one_score', 'athlete_two_score', 'order', 'confront_id'];
   }
 }
 

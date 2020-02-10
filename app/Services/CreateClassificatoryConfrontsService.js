@@ -36,8 +36,8 @@ class CreateClassificatoryConfrontsService {
         totalConfrontsEvent += 1;
 
         return {
-          player_one: conf[0].id,
-          player_two: conf[1].id,
+          athlete_one_id: conf[0].id,
+          athlete_two_id: conf[1].id,
           group_id: gp.id,
           number: totalConfrontsEvent,
           championship_id

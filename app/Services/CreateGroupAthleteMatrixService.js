@@ -3,8 +3,8 @@
 const { Championship, Athlete } = use('App/Models');
 
 class CreateGroupAthleteMatrixService {
-  async run({ championships_id }) {
-    const championship = await Championship.findOrFail(championships_id);
+  async run({ championship_id }) {
+    const championship = await Championship.findOrFail(championship_id);
 
     const res = await championship
       .athleteInscriptions()

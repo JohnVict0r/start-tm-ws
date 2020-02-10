@@ -3,8 +3,6 @@
 /** @type {import('@adonisjs/lucid/src/Schema')} */
 const Schema = use('Schema');
 
-const confront = require('../data/confront');
-
 class ConfrontSchema extends Schema {
   up() {
     this.create('confronts', (table) => {
@@ -13,19 +11,19 @@ class ConfrontSchema extends Schema {
         .integer('number')
         .notNullable()
         .unsigned();
-      table
-        .integer('player_one')
-        .notNullable()
-        .unsigned()
-        .references('athletes.id')
-        .onUpdate('cascade');
-      table
-        .integer('player_two')
-        .notNullable()
-        .unsigned()
-        .references('athletes.id')
-        .onUpdate('cascade');
       table.string('arbiter_name');
+      table
+        .integer('athlete_one_id')
+        .notNullable()
+        .unsigned()
+        .references('athletes.id')
+        .onUpdate('cascade');
+      table
+        .integer('athlete_two_id')
+        .notNullable()
+        .unsigned()
+        .references('athletes.id')
+        .onUpdate('cascade');
       table
         .boolean('finalized')
         .notNullable()

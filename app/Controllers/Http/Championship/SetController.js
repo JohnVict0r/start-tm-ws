@@ -9,8 +9,16 @@ class SetController {
   }
 
   async store({ request, params }) {
-    const data = request.only(Set.columns());
+    const { order, ...data } = request.only(Set.columns());
+
+    const setsAmount = await Set.query()
+      .where({
+        confront_id: params.confronts_id
+      })
+      .getCount();
+
     data.confront_id = params.confronts_id;
+    data.order = setsAmount + 1;
 
     return Set.create(data);
   }

@@ -5,6 +5,10 @@ const CreateClassificatoryConfrontsService = use(
   'App/Services/CreateClassificatoryConfrontsService'
 );
 
+const GetCofrontScoreResultService = use(
+  'App/Services/GetCofrontScoreResultService'
+);
+
 class ConfrontController {
   async index({ params }) {
     const confronts = await Confront.query()
@@ -29,13 +33,15 @@ class ConfrontController {
   }
 
   async show({ params }) {
-    const { id } = params;
+    const confront = await Confront.query()
+      .where({ id: params.id })
+      .with('sets')
+      .with('athleteOne')
+      .with('athleteTwo')
+      .with('table')
+      .first();
 
-    const confront = await Confront.findOrFail(id);
-
-    await confront.loadMany(['playerOne', 'playerTwo', 'table']);
-
-    return confront;
+    return GetCofrontScoreResultService.run({ confront: confront.toJSON() });
   }
 
   async destroy({ params }) {

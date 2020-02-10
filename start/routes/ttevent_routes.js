@@ -61,6 +61,16 @@ Route.group(() => {
     'confronts/:confronts_id/sets',
     'Championship/SetController'
   ).apiOnly();
+
+  // Classificatory Result
+  Route.get(
+    'classificatory_results/',
+    'Championship/ClassificatoryResultController.index'
+  );
+  Route.get(
+    'classificatory_results/:groups_id',
+    'Championship/ClassificatoryResultController.show'
+  );
 }).prefix('championships/:championships_id/');
 // .middleware(
 //   new Map([

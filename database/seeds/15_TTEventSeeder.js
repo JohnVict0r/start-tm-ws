@@ -12,10 +12,11 @@
 
 /** @type {import('@adonisjs/lucid/src/Factory')} */
 const Factory = use('Factory');
+
 const { addressPath, tteventPath } = use('App/Utils/ModelsPath');
 const { Federation } = use('App/Models');
 
-class TTEventSeeder {
+class EventSeeder {
   async run() {
     const federations_id = await Federation.ids();
     const address = await Factory.model(addressPath).create();
@@ -27,4 +28,4 @@ class TTEventSeeder {
   }
 }
 
-module.exports = TTEventSeeder;
+module.exports = EventSeeder;

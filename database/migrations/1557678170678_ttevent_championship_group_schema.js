@@ -1,13 +1,40 @@
 /** @type {import('@adonisjs/lucid/src/Schema')} */
 const Schema = use('Schema');
 
-const group = require('../data/group');
-
 class GroupSchema extends Schema {
   up() {
     this.create('groups', (table) => {
       table.increments();
-      table.enu('letter', group.letters).notNullable();
+      table
+        .enu('letter', [
+          'A',
+          'B',
+          'C',
+          'D',
+          'E',
+          'F',
+          'G',
+          'H',
+          'I',
+          'J',
+          'K',
+          'L',
+          'M',
+          'N',
+          'O',
+          'P',
+          'Q',
+          'R',
+          'S',
+          'T',
+          'U',
+          'V',
+          'W',
+          'X',
+          'Y',
+          'Z'
+        ])
+        .notNullable();
       table
         .integer('championship_id')
         .notNullable()
