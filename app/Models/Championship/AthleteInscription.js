@@ -3,7 +3,9 @@
 /** @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
 const Model = use('Model');
 
-const { athletePath, championshipPath } = use('App/Utils/ModelsPath');
+const { athletePath, championshipPath, entryPath } = use(
+  'App/Utils/ModelsPath'
+);
 const AthleteInscriptionFilter = use(
   'App/ModelFilters/AthleteInscriptionFilter'
 );
@@ -15,7 +17,7 @@ class AthleteInscription extends Model {
   }
 
   static columns() {
-    return ['athlete_id', 'championship_id', 'approved'];
+    return ['athlete_id', 'championship_id', 'entry_id', 'approved'];
   }
 
   athlete() {
@@ -24,6 +26,10 @@ class AthleteInscription extends Model {
 
   championship() {
     return this.belongsTo(championshipPath);
+  }
+
+  entry() {
+    return this.belongsTo(entryPath);
   }
 }
 

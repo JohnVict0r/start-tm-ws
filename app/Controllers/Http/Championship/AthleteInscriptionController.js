@@ -25,15 +25,19 @@ class AthleteInscriptionController {
   async show({ params }) {
     const athleteInscription = await AthleteInscription.findOrFail(params.id);
 
-    await athleteInscription.loadMany(['championship', 'athlete']);
+    await athleteInscription.loadMany(['championship', 'athlete', 'entry']);
 
     return athleteInscription;
   }
 
   async update({ params, request }) {
-    const { championship_id, approved, athlete_id, ...data } = request.only(
-      AthleteInscription.columns()
-    );
+    const {
+      championship_id,
+      approved,
+      athlete_id,
+      entry_id,
+      ...data
+    } = request.only(AthleteInscription.columns());
 
     const athleteInscription = await AthleteInscription.findOrFail(params.id);
 

@@ -17,6 +17,11 @@ class AthleteInscriptionSchema extends Schema {
         .notNullable()
         .unsigned()
         .references('championships.id');
+      table
+        .integer('entry_id')
+        .notNullable()
+        .unsigned()
+        .references('entries.id');
       table.boolean('approved').defaultTo(false);
       table.timestamps();
       table.unique(['athlete_id', 'championship_id']);
