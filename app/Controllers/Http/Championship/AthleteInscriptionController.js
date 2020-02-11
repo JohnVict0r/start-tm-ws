@@ -3,9 +3,11 @@
 const { AthleteInscription } = use('App/Models');
 
 class AthleteInscriptionController {
-  async index() {
-    const inscriptions = await AthleteInscription.all();
-    return inscriptions;
+  async index({ request }) {
+    const { page, ...data } = request.all();
+    return AthleteInscription.query()
+      .filter(data)
+      .paginate(page || 1, 10);
   }
 
   async store({ request, params }) {
