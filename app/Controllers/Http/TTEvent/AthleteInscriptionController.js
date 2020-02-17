@@ -1,7 +1,9 @@
 'use strict';
 
 const { AthleteInscription } = use('App/Models');
-
+const CreateAthleteInscriptionService = use(
+  'App/Services/CreateAthleteInscriptionService'
+);
 class AthleteInscriptionController {
   async index({ request }) {
     const { page, ...data } = request.all();
@@ -11,15 +13,16 @@ class AthleteInscriptionController {
   }
 
   async store({ request, params }) {
-    const { championships_id } = params;
-
     const data = request.only(AthleteInscription.columns());
-    data.championship_id = championships_id;
-    data.approved = true;
+    const athlInscriptionsArray = await CreateAthleteInscriptionService.run({
+      athlete_id: data.athlete_id,
+      entry_id: data.entry_id,
+      tt_event_id: params.tt_events_id
+    });
 
-    const inscription = await AthleteInscription.create(data);
+    const athlInscription = await AthleteInscription.createMany(athlInscriptionsArray);
 
-    return inscription;
+    return athlInscription;
   }
 
   async show({ params }) {

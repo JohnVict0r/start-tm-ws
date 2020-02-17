@@ -23,7 +23,9 @@ const providers = [
   '@adonisjs/validator/providers/ValidatorProvider',
   '@adonisjs/antl/providers/AntlProvider',
   'adonis-lucid-filter/providers/LucidFilterProvider',
-  path.join(__dirname, '..', 'providers', 'RoundRobin/Provider')
+  path.join(__dirname, '..', 'providers', 'RoundRobin/Provider'),
+  path.join(__dirname, '..', 'providers', 'MomentJS/Provider')
+
 ];
 /*
 |--------------------------------------------------------------------------

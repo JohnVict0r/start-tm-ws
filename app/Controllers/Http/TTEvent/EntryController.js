@@ -1,86 +1,40 @@
 'use strict';
 
-/** @typedef {import('@adonisjs/framework/src/Request')} Request */
-/** @typedef {import('@adonisjs/framework/src/Response')} Response */
-/** @typedef {import('@adonisjs/framework/src/View')} View */
-
-/**
- * Resourceful controller for interacting with entries
- */
+const { Entry } = use('App/Models');
 class EntryController {
-  /**
-   * Show a list of all entries.
-   * GET entries
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   * @param {View} ctx.view
-   */
-  async index({ request, response, view }) {}
+  async index({ params }) {
+    return Entry.query().where({ tt_event_id: params.tt_events_id }).fetch();
+  }
 
-  /**
-   * Render a form to be used for creating a new entry.
-   * GET entries/create
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   * @param {View} ctx.view
-   */
-  async create({ request, response, view }) {}
+  async store({ request, params }) {
+    const data = request.only(Entry.columns());
+    data.tt_event_id = params.tt_events_id;
 
-  /**
-   * Create/save a new entry.
-   * POST entries
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   */
-  async store({ request, response }) {}
+    const entry = await Entry.create(data);
 
-  /**
-   * Display a single entry.
-   * GET entries/:id
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   * @param {View} ctx.view
-   */
-  async show({ params, request, response, view }) {}
+    return entry;
+  }
 
-  /**
-   * Render a form to update an existing entry.
-   * GET entries/:id/edit
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   * @param {View} ctx.view
-   */
-  async edit({ params, request, response, view }) {}
+  async show({ params }) {
+    return Entry.query().where({ id: params.id }).first();
+  }
 
-  /**
-   * Update entry details.
-   * PUT or PATCH entries/:id
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   */
-  async update({ params, request, response }) {}
+  async update({ params, request }) {
+    const { tt_event_id, ...data } = request.only(Entry.columns());
 
-  /**
-   * Delete a entry with id.
-   * DELETE entries/:id
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   */
-  async destroy({ params, request, response }) {}
+    const entry = await Entry.findOrFail(params.id);
+
+    entry.merge(data);
+    await entry.save();
+
+    return entry;
+  }
+
+  async destroy({ params }) {
+    const entry = await Entry.findOrFail(params.id);
+
+    return entry.delete();
+  }
 }
 
 module.exports = EntryController;

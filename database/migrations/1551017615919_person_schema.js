@@ -12,7 +12,7 @@ class PersonSchema extends Schema {
         .onUpdate('CASCADE')
         .onDelete('CASCADE');
       table.string('name').notNullable();
-      table.enu('sex', ['MALE', 'FEMALE']).notNullable();
+      table.enu('sex', ['M', 'F', 'X']).notNullable();
       table.date('birth').notNullable();
       table
         .string('cpf', 11)

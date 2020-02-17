@@ -1,5 +1,6 @@
 {
   "env": {
+    "commonjs": true,
     "es6": true,
     "node": true
   },
@@ -17,9 +18,16 @@
   "rules": {
     "class-methods-use-this": "off",
     "camelcase": "off",
-    "strict": ["off", "global"],
+    "strict": [
+      "off",
+      "global"
+    ],
     "comma-dangle": "off",
     "arrow-parens": "off",
-    "prefer-spread": "off"
+    "prefer-spread": "off",
+    "max-len": [
+      2,
+      80
+    ]
   }
 }

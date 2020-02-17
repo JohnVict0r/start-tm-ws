@@ -21,6 +21,15 @@ Route.resource('ttevents', 'TTEventController').apiOnly();
 Route.group(() => {
   // Table
   Route.resource('tables', 'TTEvent/TableController').apiOnly();
+
+  // Entry
+  Route.resource('entries', 'TTEvent/EntryController').apiOnly();
+
+  // Athlete Inscription
+  Route.resource(
+    'athlete-inscriptions',
+    'TTEvent/AthleteInscriptionController'
+  ).apiOnly();
 }).prefix('ttevents/:tt_events_id/');
 // .middleware(
 //   new Map([
@@ -44,12 +53,6 @@ Route.resource('championships', 'ChampionshipController').apiOnly();
 // );
 
 Route.group(() => {
-  // Athlete Inscription
-  Route.resource(
-    'athlete-inscriptions',
-    'Championship/AthleteInscriptionController'
-  ).apiOnly();
-
   // Group
   Route.resource('groups', 'Championship/GroupController').apiOnly();
 
@@ -62,14 +65,13 @@ Route.group(() => {
     'Championship/SetController'
   ).apiOnly();
 
-  // Classificatory Result
-  Route.get(
-    'classificatory_results/',
-    'Championship/ClassificatoryResultController.index'
-  );
   Route.get(
     'classificatory_results/:groups_id',
     'Championship/ClassificatoryResultController.show'
+  );
+  Route.put(
+    'classificatory_results/:groups_id',
+    'Championship/ClassificatoryResultController.update'
   );
 }).prefix('championships/:championships_id/');
 // .middleware(

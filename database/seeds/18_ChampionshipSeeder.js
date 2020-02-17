@@ -18,8 +18,12 @@ const { TTEvent } = use('App/Models');
 class ChampionshipSeeder {
   async run() {
     const ttevents_id = await TTEvent.ids();
-    const championship = await Factory.model(championshipPath).create({
-      tt_event_id: ttevents_id[0]
+
+    const types = ['RAT', 'RAK', 'RAK'];
+    const championship = await Factory.model(championshipPath).createMany(3, {
+      tt_event_id: ttevents_id[0],
+      types,
+      sex: 'M'
     });
   }
 }

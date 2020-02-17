@@ -9,6 +9,7 @@ const Address = use(paths.addressPath);
 const Club = use(paths.clubPath);
 const Federation = use(paths.federationPath);
 const Athlete = use(paths.athletePath);
+const AthleteInscription = use(paths.athleteInscriptionPath);
 
 /**
  * Event
@@ -23,7 +24,6 @@ const Table = use(paths.tablePath);
  */
 const Championship = use(paths.championshipPath);
 const Confront = use(paths.confrontPath);
-const AthleteInscription = use(paths.athleteInscriptionPath);
 const Group = use(paths.groupPath);
 const GroupAthlete = use(paths.groupAthletePath);
 const Set = use(paths.setPath);
@@ -36,6 +36,7 @@ module.exports = {
   Club,
   Federation,
   Athlete,
+  AthleteInscription,
 
   TTEvent,
 
@@ -43,7 +44,6 @@ module.exports = {
   Table,
 
   Championship,
-  AthleteInscription,
   Confront,
   Group,
   GroupAthlete,

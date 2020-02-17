@@ -10,13 +10,15 @@ const federationPath = `${basePath}/Federation`;
 const personPath = `${basePath}/Person`;
 const tokenPath = `${basePath}/Token`;
 const userPath = `${basePath}/User`;
+const subscriptionPath = `${basePath}/Auth/Subscription`;
+
 const entryPath = `${tteventPath}/Entry`;
 const tablePath = `${tteventPath}/Table`;
-const athleteInscriptionPath = `${championshipPath}/AthleteInscription`;
+const athleteInscriptionPath = `${tteventPath}/AthleteInscription`;
+
 const confrontPath = `${championshipPath}/Confront`;
 const groupPath = `${championshipPath}/Group`;
 const setPath = `${championshipPath}/Set`;
-const subscriptionPath = `${basePath}/Auth/Subscription`;
 const groupAthletePath = `${championshipPath}/GroupAthlete`;
 
 module.exports = {

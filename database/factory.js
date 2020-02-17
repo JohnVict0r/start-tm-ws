@@ -55,16 +55,16 @@ Factory.blueprint('Adonis/Acl/Permission', async (faker, i, data) => ({
 }));
 
 Factory.blueprint(paths.athletePath, async (faker, i, data) => ({
-  rating: (i + 1) * 100,
+  rating: data.rating,
   club_id: faker.pickone(data.clubs_id)
 }));
 
-Factory.blueprint(paths.personPath, async (faker) => ({
+Factory.blueprint(paths.personPath, async (faker, i, data) => ({
   name: faker.name(),
-  sex: faker.gender().toUpperCase(),
+  sex: data.sex,
   birth: faker.date({
     string: true,
-    year: `${faker.integer({ min: 1930, max: 2012 })}`
+    year: data.year
   }),
   cpf: faker.cpf()
 }));
@@ -90,10 +90,6 @@ Factory.blueprint(paths.addressPath, async (faker) => ({
   uf: faker.pickone(ufs)
 }));
 
-Factory.blueprint(paths.athleteInscriptionPath, async (faker, i, data) => ({
-  championship_id: faker.pickone(data.championships_id),
-  approved: true
-}));
 
 Factory.blueprint(paths.tteventPath, async (faker, i, data) => {
   const startInscription = faker
@@ -122,19 +118,27 @@ Factory.blueprint(paths.tteventPath, async (faker, i, data) => {
 });
 
 Factory.blueprint(paths.championshipPath, async (faker, i, data) => {
-  let upperLimit = faker.integer({ min: 0, max: 3499 });
-  let downLimit = faker.integer({ min: upperLimit, max: 3500 });
-  const sex = faker.pickone(['M', 'F', 'X']);
-  const type = faker.pickone(['RAT', 'RAK']);
-
+  let downLimit = faker.integer({ min: 0, max: 3300 });
+  let upperLimit = downLimit + 200;
+  const { sex } = data;
+  const type = data.types[i];
+  let rankName = '';
   if (type === 'RAK') {
-    upperLimit = faker.integer({ min: 8, max: 69 });
-    downLimit = faker.integer({ min: upperLimit, max: 70 });
+    downLimit = faker.integer({ min: 8, max: 100 });
+    upperLimit = downLimit + 2;
+
+    if (upperLimit <= 8) rankName = 'PRÉ-MIRIM';
+    else if (upperLimit <= 10) rankName = 'MIRIM';
+    else if (upperLimit <= 12) rankName = 'PETIZ';
+    else if (upperLimit <= 15) rankName = 'INFANTIL';
+    else if (upperLimit <= 18) rankName = 'JUVENIL';
+    else if (upperLimit <= 21) rankName = 'JUVENTUDE';
+    else rankName = 'ABSOLUTO';
   }
 
   return {
     tt_event_id: data.tt_event_id,
-    name: `Campeonato ${sex} ${type}`,
+    name: `Campeonato ${type} ${rankName} ${sex}`,
     sex,
     type,
     upperLimit,
@@ -165,4 +169,10 @@ Factory.blueprint(paths.confrontPath, async (faker, i, data) => ({
   ...data,
   finalized: true,
   arbiter_name: faker.name()
+}));
+
+Factory.blueprint(paths.entryPath, async (faker, i, data) => ({
+  tt_event_id: data.tt_event_id,
+  type: data.type,
+  price: faker.integer({ min: 70, max: 200 })
 }));

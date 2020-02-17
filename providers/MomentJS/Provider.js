@@ -1,12 +1,12 @@
 const { ServiceProvider } = require('@adonisjs/fold');
 
-class RoundRobinProvider extends ServiceProvider {
+class MomentJSProvider extends ServiceProvider {
   register() {
-    this.app.singleton('RoundRobin', () => {
+    this.app.singleton('MomentJS', () => {
       const Config = this.app.use('Adonis/Src/Config');
       return new (require('.'))(Config);
     });
   }
 }
 
-module.exports = RoundRobinProvider;
+module.exports = MomentJSProvider;
